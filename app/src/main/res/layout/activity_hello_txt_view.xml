@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.kk.lp.textview.TextPage
+        android:id="@+id/txtview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A bit more than five years ago, I got my first smartphone. It was the Nexus One. And I didn’t know it at the time, but it was hiding a zombie gingerbread painting inside it. The first (of now many) Android “platform” easter eggs.Android actually has a long, rich history of various mysterious and silly things tucked away inside its code for developers to enjoy. But its “platform” or “version number” easter eggs are probably the most elaborate and well-known.Earlier this summer, my friend at work Lo and I started this project to go find out about different Google stuff we’re curious about. And one of the things we wanted to know more about was how the Android lawn sculptures get made. Which lead to us also finding out about why Android names its releases after tasty treats, and making this video.As we were digging deeper into Android traditions, I decided to head up to Cambridge to get the inside scoop about Android’s easter eggs tradition from Android Framework Engineer / Easter Egg Painter, Dan Sandler. Which we just made this video about." >
+        </com.kk.lp.textview.TextPage>
+
+</LinearLayout>

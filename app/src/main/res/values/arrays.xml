@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="server">        
+     <item>服务器一(8000端口)</item>            
+     <item>服务器二(8010端口)</item>            
+     <item>服务器三(8020端口)</item>
+     <item>服务器四(8030端口)</item>
+     <item>服务器五(8040端口)</item>        
+  </string-array>
+</resources>

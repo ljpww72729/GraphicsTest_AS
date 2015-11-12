@@ -1,0 +1,30 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light"></style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
+        <item name="android:textColorPrimaryInverse">@color/textColorPrimaryInverse</item>
+        <item name="android:textColorSecondaryInverse">@color/textColorSecondaryInverse</item>
+    </style>
+    
+    <style name="AppTheme.Dark" parent="Theme.AppCompat">
+         <item name="colorPrimary">@color/colorPrimaryInverse</item>
+         <item name="colorPrimaryDark">@color/colorPrimaryDarkInverse</item>
+         <item name="colorAccent">@color/colorAccentInverse</item>
+         <item name="android:textColorPrimary">@color/textColorPrimaryInverse</item>
+         <item name="android:textColorSecondary">@color/textColorSecondaryInverse</item>
+         <item name="android:textColorPrimaryInverse">@color/textColorPrimary</item>
+         <item name="android:textColorSecondaryInverse">@color/textColorSecondary</item>
+    </style>
+
+</resources>
