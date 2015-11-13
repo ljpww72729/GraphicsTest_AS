@@ -22,8 +22,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.kk.lp.R;
-
 /**
  * Fragment used for managing interactions for and presentation of a navigation
  * drawer. See the <a href=
@@ -107,7 +105,7 @@ public class NavigationDrawerFragment extends Fragment {
 				"6自定义按钮", "7拍照", "8Webview", 
 				"9Async", "10Button", "11socket服务",
 				"12Annotation","13socket服务器","14socket客户端",
-				"文件操作","自定义长按选择事件"
+				"15文件操作","16自定义长按选择事件","17百分比布局"
 				};
 		ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getActionBar().getThemedContext(), android.R.layout.simple_list_item_1, android.R.id.text1, items);
 		mDrawerListView.setAdapter(arrayAdapter);
