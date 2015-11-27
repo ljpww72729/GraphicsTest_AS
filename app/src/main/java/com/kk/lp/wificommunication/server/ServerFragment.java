@@ -18,17 +18,16 @@ import android.widget.Toast;
 import com.kk.lp.BaseFragment;
 import com.kk.lp.R;
 import com.kk.lp.utils.SPUtils;
-import com.kk.lp.wificommunication.client.ClientSocketService;
 import com.kk.lp.wificommunication.client.WifiUtils;
 
 import de.greenrobot.event.EventBus;
 
 /**
- * 
+ *
  * @Description 开启服务器端
  * @author lipeng
  * @version 2015-7-10
- * 
+ *
  */
 
 public class ServerFragment extends BaseFragment {
@@ -39,6 +38,8 @@ public class ServerFragment extends BaseFragment {
 	private TextView fs_local_ip;
 	// 选中的id
 	private int selectWhich;
+	// 客户端连接
+	public AsyncTaskClientConnected asyncTaskClientConnect;
 
 	@Override
 	@Nullable
@@ -49,6 +50,7 @@ public class ServerFragment extends BaseFragment {
 	}
 
 	private void initView(View view) {
+		asyncTaskClientConnect = new AsyncTaskClientConnected();
 		selectWhich = (int) SPUtils.get(getActivity(), SocketListenerService.SOCKET_PORT, 0);
 		fs_local_ip = (TextView) view.findViewById(R.id.fs_local_ip);
 		fs_local_ip.setText("当前连接的wifi为：" + WifiUtils.getWifiName(getActivity()) + "\n服务器端本机地址的是：" + WifiUtils.getServerIP(getActivity()) + "\n默认开启的端口为：" + getPort());
@@ -123,10 +125,15 @@ public class ServerFragment extends BaseFragment {
 	// 停止socket服务
 	public void stopServer() {
 		serverRunning = false;
-		fs_start.setEnabled(true);
 		if (intentServer != null) {
 			ServerFragment.this.getActivity().stopService(intentServer);
 		}
+		if(asyncTaskClientConnect != null){
+			asyncTaskClientConnect.cancelAllTask();
+			asyncTaskClientConnect = null;
+		}
+		fs_start.setEnabled(true);
+
 	}
 
 	@Override
@@ -141,12 +148,12 @@ public class ServerFragment extends BaseFragment {
 		super.onStop();
 	}
 
-	/** 
-	* @Description 服务器端当前socket状态
-	* @author lipeng
-	* @param event 
-	* @return void 
-	*/
+	/**
+	 * @Description 服务器端当前socket状态
+	 * @author lipeng
+	 * @param event
+	 * @return void
+	 */
 	public void onEventMainThread(SocketServerInfo event) {
 		if(event.status == SocketServerInfo.SOCKET_CREATE_FAILED){
 			Toast.makeText(getActivity(), "端口绑定失败，请更换端口重新绑定！", Toast.LENGTH_SHORT).show();
@@ -157,16 +164,20 @@ public class ServerFragment extends BaseFragment {
 		}
 	}
 
-	
-	/** 
-	* @Description 客户端发送的消息
-	* @author lipeng
-	* @param event 
-	* @return void 
-	*/
+
+	/**
+	 * @Description 客户端发送的消息
+	 * @author lipeng
+	 * @param event
+	 * @return void
+	 */
 	public void onEventMainThread(ClientInfo event) {
 		if (event.msgType == ClientInfo.MSG_NORMAL) {
-			Toast.makeText(getActivity(), event.msg, Toast.LENGTH_SHORT).show();
+			if(event.socketClient != null){
+				asyncTaskClientConnect.clientConnect(event.socketClient);
+			}else{
+				Toast.makeText(getActivity(), event.msg, Toast.LENGTH_SHORT).show();
+			}
 		} else if (event.msgType == ClientInfo.MSG_DATA) {
 			Toast.makeText(getActivity(), event.data, Toast.LENGTH_SHORT).show();
 		} else {

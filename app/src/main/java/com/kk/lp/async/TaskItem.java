@@ -16,7 +16,7 @@ import com.kk.lp.R;
  * 
  */
 
-class TaskItem extends LinearLayout {
+public class TaskItem extends LinearLayout {
 	private TextView mTitle;
 	private ProgressBar mProgress;
 

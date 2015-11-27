@@ -1,9 +1,5 @@
 package com.kk.lp.wificommunication.client;
 
-import java.io.IOException;
-import java.net.Socket;
-import java.util.Map;
-
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
@@ -24,6 +20,10 @@ import com.kk.lp.BaseFragment;
 import com.kk.lp.R;
 import com.kk.lp.utils.SPUtils;
 import com.kk.lp.wificommunication.server.SocketUtil;
+
+import java.io.IOException;
+import java.net.Socket;
+import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
@@ -221,7 +221,7 @@ public class ClientFragment extends BaseFragment {
 	 */
 	public void onEventMainThread(SocketClientInfo event) {
 		if (event.status == SocketClientInfo.SOCKET_CONNECTED) {
-			Toast.makeText(getActivity(), "正在读取数据", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), "开始读取数据", Toast.LENGTH_SHORT).show();
 			intentReadService = new Intent(getActivity(), ReadDataService.class);
 			getActivity().startService(intentReadService);
 			socket = event.socket;

@@ -53,8 +53,7 @@
         </service>
         <service
             android:name=".wificommunication.client.ReadDataService"
-            android:exported="false"
-            android:process=":readData"></service>
+            android:exported="false" />
     </application>
 
 </manifest>

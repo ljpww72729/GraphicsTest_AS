@@ -1,40 +1,41 @@
 package com.kk.lp.wificommunication.server;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 import de.greenrobot.event.EventBus;
 
 /**
- * 
+ *
  * @Description
  * @author lipeng
  * @version 2015-7-10
- * 
+ *
  */
 
 public class SocketListenerService extends Service {
 
 	public static final String SERVICE_AUTHORITY = "com.kk.lp.socketlistenerservice";
 
-	private String clientInfo;
+	private String clientInfoStr;
 	private ServerBinder serverBinder = new ServerBinder();
 	public static ServerSocket serverSocket = null;// 服务Socket
 	public static Socket mSocketServer = null;// 用于和客户端连接的socket
 	public final static String SOCKET_PORT = "server_socket_port";// 监听端口
-	// 客户端连接
-	public AsyncTaskClientConnected asyncTaskClientConnect;
+
+	public static ClientInfo clientInfo;
 
 	public class ServerBinder extends Binder {
 		// 获取服务器端发送的数据
 		public String getClientInfo() {
-			return clientInfo;
+			return clientInfoStr;
 		}
 	}
 
@@ -47,7 +48,7 @@ public class SocketListenerService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		asyncTaskClientConnect = new AsyncTaskClientConnected();
+		clientInfo = new ClientInfo();
 	}
 
 	@Override
@@ -77,7 +78,9 @@ public class SocketListenerService extends Service {
 						//监听客户端
 						mSocketServer = serverSocket.accept();// 接受请求
 						Log.d("socket", "Client Conect!");
-						asyncTaskClientConnect.clientConnect(mSocketServer);
+						clientInfo.msgType = ClientInfo.MSG_NORMAL;
+						clientInfo.socketClient = mSocketServer;
+						EventBus.getDefault().post(clientInfo);
 					}
 
 				} catch (Exception e) {
@@ -90,7 +93,6 @@ public class SocketListenerService extends Service {
 
 	@Override
 	public void onDestroy() {
-		asyncTaskClientConnect.cancelAllTask();
 		// 关闭socket链接
 		if (serverSocket != null) {
 			try {
