@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/dictLookup" android:title="dictLookup" android:showAsAction="always"></item>
-    <item android:id="@+id/readFromHere" android:title="readFromHere" android:showAsAction="always"></item>
-    
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/dictLookup"
+        android:icon="@drawable/loadi_03"
+        android:title="dictLookup"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/readFromHere"
+        android:icon="@drawable/loadi_03"
+        android:title="readFromHere"
+        app:showAsAction="ifRoom" />
+
 
 </menu>
