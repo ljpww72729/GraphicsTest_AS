@@ -17,4 +17,6 @@
     <color name="colorPrimaryInverse">#DE000000</color>
     <color name="colorPrimaryDarkInverse">#DE000000</color>
     <color name="colorAccentInverse">#DE000000</color>
+    <color name="black">#000000</color>
+    <color name="transparency">#00000000</color>
 </resources>
