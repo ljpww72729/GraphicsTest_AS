@@ -24,6 +24,7 @@ import com.kk.lp.graphicstest.RadiusButtonViewFragment;
 import com.kk.lp.graphicstest.webview.WebviewFragment;
 import com.kk.lp.percentlayout.PercentLayoutFragment;
 import com.kk.lp.popupmenuandwindow.PopupMenuFragment;
+import com.kk.lp.scrollview.XScrollViewFragment;
 import com.kk.lp.textview.TextViewLongClick;
 import com.kk.lp.wificommunication.client.ClientFragment;
 import com.kk.lp.wificommunication.server.ServerFragment;
@@ -115,6 +116,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                 break;
             case 18:
                 fragment = PopupMenuFragment.newInstance();
+                break;
+            case 19:
+                fragment = XScrollViewFragment.newInstance();
                 break;
 
             default:

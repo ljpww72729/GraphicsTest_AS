@@ -105,7 +105,7 @@ public class NavigationDrawerFragment extends Fragment {
 				"6自定义按钮", "7拍照", "8Webview", 
 				"9Async", "10Button", "11socket服务",
 				"12Annotation","13socket服务器","14socket客户端",
-				"15文件操作","16自定义长按选择事件","17百分比布局","18PopupMenu"
+				"15文件操作","16自定义长按选择事件","17百分比布局","18PopupMenu","19XScrollView"
 				};
 		ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getActionBar().getThemedContext(), android.R.layout.simple_list_item_1, android.R.id.text1, items);
 		mDrawerListView.setAdapter(arrayAdapter);
