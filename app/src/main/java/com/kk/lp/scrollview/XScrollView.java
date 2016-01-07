@@ -27,7 +27,7 @@ public class XScrollView extends ScrollView {
 
     private TextView mHeaderTimeView;
     private Context mContext;
-    private float mLastY;
+    private float mLastY = -1;
     //ScrollView下的子View
     private View mContentView;
     //headerView

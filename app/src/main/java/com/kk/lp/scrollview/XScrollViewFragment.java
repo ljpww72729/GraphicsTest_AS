@@ -46,7 +46,7 @@ public class XScrollViewFragment extends Fragment {
 
         @Override
         public void onRefresh() {
-            Toast.makeText(XScrollViewFragment.this.getActivity(), "refresh", Toast.LENGTH_LONG).show();
+            Toast.makeText(XScrollViewFragment.this.getActivity(), "刷新完成", Toast.LENGTH_LONG).show();
             xScrollView.postDelayed(new Runnable() {
                 @Override
                 public void run() {
