@@ -1,0 +1,30 @@
+apply plugin: 'java'
+
+test{
+
+//    filter{
+//        include
+//    }
+
+    // explicitly include or exclude tests
+//    include 'com/kk/lp/reflection/TestFree.class'
+//    exclude 'com/kk/lp/reflection/TestFree.class'
+//
+//    // show standard out and standard error of the test JVM(s) on the console
+//    testLogging.showStandardStreams = true
+//
+//    // listen to events in the test execution lifecycle
+//    beforeTest { descriptor ->
+//        logger.lifecycle("Running test: " + descriptor)
+//    }
+//
+//    // listen to standard out and standard error of the test JVM(s)
+//    onOutput { descriptor, event ->
+//        logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.getMessage() )
+//    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+}

@@ -5,7 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.internal.view.menu.MenuPopupHelper;
+import android.support.v7.view.menu.MenuPopupHelper;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;

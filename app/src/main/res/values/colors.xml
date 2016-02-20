@@ -19,4 +19,7 @@
     <color name="colorAccentInverse">#DE000000</color>
     <color name="black">#000000</color>
     <color name="transparency">#00000000</color>
+
+    <color name="green">#c8255f26</color>
+    <color name="white">#f2f2f2</color>
 </resources>
