@@ -13,6 +13,9 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <!-- Facebook Messenger with Chat Head Demo -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -55,6 +58,7 @@
         <service
             android:name=".wificommunication.client.ReadDataService"
             android:exported="false" />
+        <service android:name=".facebookchathead.ServiceChatHead"/>
 
     </application>
 
