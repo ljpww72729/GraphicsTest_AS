@@ -1,15 +1,15 @@
 package com.kk.lp.scrollview;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.kk.lp.BaseFragment;
 import com.kk.lp.R;
 
-public class XScrollViewFragment extends Fragment {
+public class XScrollViewFragment extends BaseFragment {
     private XScrollView xScrollView;
     public XScrollViewFragment() {
         // Required empty public constructor
@@ -50,7 +50,18 @@ public class XScrollViewFragment extends Fragment {
             xScrollView.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    onLoad();
+                    onRefreshLoad();
+                }
+            }, 1000);
+        }
+
+        @Override
+        public void onLoadMore() {
+            Toast.makeText(XScrollViewFragment.this.getActivity(), "加载完成", Toast.LENGTH_LONG).show();
+            xScrollView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    onMoreLoad();
                 }
             }, 1000);
         }
@@ -59,9 +70,14 @@ public class XScrollViewFragment extends Fragment {
     /*
 	 * 停止刷新或加载操作
 	 */
-    private void onLoad() {
+    private void onRefreshLoad() {
         xScrollView.stopRefresh();
         xScrollView.setRefreshTime(true);
-
+    }
+    /*
+	 * 停止刷新或加载操作
+	 */
+    private void onMoreLoad() {
+        xScrollView.stopLoadMore();
     }
 }

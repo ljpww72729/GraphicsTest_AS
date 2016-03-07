@@ -45,5 +45,7 @@
               android:title="touchGestureDetector" />
         <item android:id="@+id/FABFragment"
               android:title="Floating action bar" />
+        <item android:id="@+id/vectorDrawable"
+              android:title="vectorDrawable" />
     </group>
 </menu>

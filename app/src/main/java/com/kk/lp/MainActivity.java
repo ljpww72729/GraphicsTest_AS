@@ -10,7 +10,6 @@ import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +31,7 @@ import com.kk.lp.material_design.MaterialDetailActivity;
 import com.kk.lp.percentlayout.PercentLayoutFragment;
 import com.kk.lp.popupmenuandwindow.PopupMenuFragment;
 import com.kk.lp.scrollview.XScrollViewFragment;
+import com.kk.lp.support_lib_23_2.VectorDrawableActivity;
 import com.kk.lp.textview.TextViewLongClick;
 import com.kk.lp.touch.TouchGestureDetectorFragment;
 import com.kk.lp.viewdrag.ViewDragFragment;
@@ -39,7 +39,7 @@ import com.kk.lp.wificommunication.client.ClientFragment;
 import com.kk.lp.wificommunication.server.ServerFragment;
 import com.mikepenz.iconics.context.IconicsLayoutInflater;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawerLayout.setDrawerListener(toggle);
+        mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_drawer);
@@ -148,6 +148,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragment = TouchGestureDetectorFragment.newInstance();
         }else if (id == R.id.FABFragment) {
             Intent intent = new Intent(this, MaterialDetailActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.vectorDrawable) {
+            Intent intent = new Intent(this, VectorDrawableActivity.class);
             startActivity(intent);
         }
 if (fragment != null){
