@@ -1,5 +1,6 @@
 package com.kk.lp.regex;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -9,6 +10,6 @@ public class RegexUtilsTest {
 
     @Test
     public void testCheckMobile() throws Exception {
-        RegexUtils.checkMobile("1234678901");
+        Assert.assertTrue(RegexUtils.checkMobile("1234678011"));
     }
 }

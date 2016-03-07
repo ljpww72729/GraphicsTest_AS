@@ -14,6 +14,9 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
+    <!-- Facebook Messenger with Chat Head Demo -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true"/>
@@ -58,8 +61,15 @@
         <service
             android:name=".wificommunication.client.ReadDataService"
             android:exported="false"/>
+        <service android:name=".facebookchathead.ServiceChatHead"/>
 
         <activity android:name=".support_lib_23_2.VectorDrawableActivity"
+                  android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".mvp.MVPActivity"
                   android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
