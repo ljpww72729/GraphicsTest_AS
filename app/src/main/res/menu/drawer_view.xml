@@ -47,5 +47,7 @@
               android:title="Floating action bar" />
         <item android:id="@+id/vectorDrawable"
               android:title="vectorDrawable" />
+	<item android:id="@+id/chatHead"
+              android:title="chatHead" />
     </group>
 </menu>

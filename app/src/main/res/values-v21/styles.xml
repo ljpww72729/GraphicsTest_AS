@@ -20,7 +20,8 @@
     <style name="App_Theme" parent="AppBaseTheme">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowTranslucentStatus">true</item>
+        <!-- android:windowTranslucentStatus 该属性表示将状态栏置成透明 -->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
     </style>
 
 </resources>

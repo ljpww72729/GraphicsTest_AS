@@ -28,5 +28,23 @@ proguard/
 # Android Studio Navigation editor temp files
 .navigation/
 
+# Android Studio
+*.iml
+.idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+
 # Android Studio captures folder
 captures/
+
+# Windows thumbnail db
+Thumbs.db
+
+# OSX files
+.DS_Store
+
+# Eclipse project files
+.classpath
+.project
+
+#NDK
+obj/
