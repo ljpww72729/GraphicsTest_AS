@@ -24,6 +24,10 @@ public class UtilsLog {
 		if (LOG)
 			Log.d(tag, msg != null ? msg : NULL_STR);
 	}
+    public static void d(String tag, int msg) {
+        if (LOG)
+            Log.d(tag,String.valueOf(msg));
+    }
 
 	public static void d(String tag, String msg, Throwable tr) {
 		if (LOG)

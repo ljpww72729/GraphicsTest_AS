@@ -45,8 +45,10 @@
               android:title="touchGestureDetector" />
         <item android:id="@+id/FABFragment"
               android:title="Floating action bar" />
-        <item android:id="@+id/chatHead"
-            android:title="chatHead" />
+        <item android:id="@+id/vectorDrawable"
+              android:title="vectorDrawable" />
+	<item android:id="@+id/chatHead"
+              android:title="chatHead" />
         <item android:id="@+id/vectorDrawableActivity"
             android:title="VectorDrawableActivity" />
     </group>

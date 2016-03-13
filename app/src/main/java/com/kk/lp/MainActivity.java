@@ -18,7 +18,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,7 +49,7 @@ import com.kk.lp.viewdrag.ViewDragFragment;
 import com.kk.lp.wificommunication.client.ClientFragment;
 import com.kk.lp.wificommunication.server.ServerFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final int MY_PERMISSIONS_REQUEST_SYSTEM_ALTER_WINDOW = 0;
     private DrawerLayout mDrawerLayout;
@@ -69,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawerLayout.setDrawerListener(toggle);
+        mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_drawer);
@@ -160,15 +159,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.FABFragment) {
             Intent intent = new Intent(this, MaterialDetailActivity.class);
             startActivity(intent);
-        } else if (id == R.id.chatHead) {
+        }else if (id == R.id.vectorDrawable) {
+            Intent intent = new Intent(this, VectorDrawableActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.chatHead) {
             showOverlayWindowView();
         }else if (id == R.id.vectorDrawableActivity) {
             Intent intent = new Intent(this, VectorDrawableActivity.class);
             startActivity(intent);
         }
-        if (fragment != null) {
-            fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
-        }
+		
+if (fragment != null){
+    fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+}
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
