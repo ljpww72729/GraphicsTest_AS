@@ -8,6 +8,7 @@ android {
         applicationId "com.kk.lp"
         minSdkVersion 10
         targetSdkVersion 23
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -23,7 +24,7 @@ android {
 //    commandLine 'cmd', "$lockhunter", '/delete', '/silent', buildDir
 //}
 ext{
-    supportVersion="23.1.1"
+    supportVersion="23.2.0"
 }
 dependencies {
     compile files('libs/androidannotations-api-3.2.jar')
@@ -35,4 +36,6 @@ dependencies {
     compile "com.android.support:design:${supportVersion}"
     compile 'com.mikepenz:iconics-core:2.5.5@aar'
     compile 'com.mikepenz:typeicons-typeface:2.0.7.1@aar'
+    compile "com.android.support:support-vector-drawable:${supportVersion}"
+    compile "com.android.support:animated-vector-drawable:${supportVersion}"
 }

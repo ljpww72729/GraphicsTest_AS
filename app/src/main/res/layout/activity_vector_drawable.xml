@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".support23_2.VectorDrawableActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -36,45 +37,25 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:srcCompat="@drawable/fab_plus"
-        app:borderWidth="0dp"
-        app:elevation="6dp"
-        app:fabSize="normal"
-        app:layout_anchor="@id/recyclerview"
-        app:layout_anchorGravity="bottom|right|end"
-        app:pressedTranslationZ="12dp"
+
+    <ImageView
+        android:id="@+id/img_vector"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/ic_face_black_24dp"
         />
-
     <ImageButton
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/change_night_mode"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:background="@drawable/oval_ripple"
-        android:elevation="6dp"
-        android:stateListAnimator="@animator/fab_raise"
-        android:visibility="visible"
-        app:ico_color="@color/white"
-        app:ico_icon="typ_arrow_left"
-        app:ico_size="24dp"
-        tools:targetApi="lollipop"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-   <!--
-    针对Android-Iconics，地址：https://github.com/mikepenz/Android-Iconics
-        app:ico_contour_width="1dp" 描边（轮廓）的宽度
-        app:ico_contour_color="@android:color/transparent" 描边的颜色
-        app:ico_background_color="@android:color/black" 矢量图的背景色，默认为透明色
-        app:ico_padding="1dp" 矢量图图标相对于自身画布的padding
-        app:ico_corner_radius="10dp" 矢量图画布的圆角半径
-        app:ico_offset_x="6dp" 矢量图图标偏移量，正数向右偏移
-        -->
+        app:srcCompat="@drawable/vector_drawable_state"
+        />
+</LinearLayout>
+
+
 </android.support.design.widget.CoordinatorLayout>

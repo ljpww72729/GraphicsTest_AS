@@ -1,11 +1,13 @@
 package com.kk.lp.material_design;
 
 import android.animation.Animator;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 
 import com.kk.lp.BaseActivity;
 import com.kk.lp.R;
+import com.mikepenz.iconics.context.IconicsLayoutInflater;
 
 /**
  * Created by lipeng on 2-19.
@@ -33,6 +36,7 @@ public class MaterialDetailActivity extends BaseActivity{
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        int dp = (int) Resources.getSystem().getDisplayMetrics().density;
         ((CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout)).setTitle(getString(R.string.app_name));
         RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerview);
         rv.setLayoutManager(new LinearLayoutManager(this));
