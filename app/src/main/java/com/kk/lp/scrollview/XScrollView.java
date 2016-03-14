@@ -167,10 +167,11 @@ public class XScrollView extends ScrollView{
                 if (location[1] - mContentViewOriginLocation[1] >= 0 && (mHeaderView.getVisiableHeight() > 0 || deltaY > 0)) {
 //                    mFooterView.setState(XListViewFooter.STATE_NORMAL);
                     updateHeaderHeight(deltaY / OFFSET_RADIO);
-                } else if (contentToBottom() && (mFooterView.getBottomMargin() > 0 || deltaY < 0)) {
+                } else if (contentToBottom()) {
                     UtilsLog.d("deltaY++++", (int) deltaY);
                     // last item, already pulled up or want to pull up.
-                    updateFooterHeight(-deltaY / OFFSET_RADIO);
+//                    updateFooterHeight(-deltaY / OFFSET_RADIO, ev);
+                    updateFooterHeight(-deltaY, ev);
                 }
                 break;
             default:
@@ -201,12 +202,14 @@ public class XScrollView extends ScrollView{
             //如果header可见则屏蔽scrollview内部的滚动事件
             return true;
         }
-        if (mFooterView.getBottomMargin()>0 && deltaYLast > 0){
-            return true;
-        }
+//        if (ev.getAction() == MotionEvent.ACTION_DOWN && contentToBottom()){
+//            return true;
+//        }
+//        if (contentToBottom()&& deltaYLast > 0 && mFooterView.getBottomMargin() > 0){//
+//            return true;
+//        }
         return super.onTouchEvent(ev);
     }
-
 
     private void updateHeaderHeight(float delta) {
 //        mHeaderView.setVisiableHeight((int) delta + mHeaderView.getVisiableHeight());
@@ -255,13 +258,14 @@ public class XScrollView extends ScrollView{
         }
     }
 
-    private void updateFooterHeight(float delta) {
+    private void updateFooterHeight(float delta, MotionEvent ev) {
 //        int height = mFooterView.getBottomMargin() + (int) delta;
         int height = (int) delta;
         if (height < 0){
             height = 0;
             return;
         }
+        mFooterView.setBottomMargin(height);
         UtilsLog.d("height++++", height);
         if (mEnablePullLoad && !mPullLoading) {
             if (height > PULL_LOAD_MORE_DELTA) { // height enough to invoke load
@@ -271,9 +275,10 @@ public class XScrollView extends ScrollView{
             } else {
                 UtilsLog.d("STATE_NORMAL++++", "STATE_NORMAL");
                 mFooterView.setState(XListViewFooter.STATE_NORMAL);
+
             }
         }
-        mFooterView.setBottomMargin(height);
+
 
         // setSelection(mTotalItemCount - 1); // scroll to bottom
     }
@@ -337,11 +342,11 @@ public class XScrollView extends ScrollView{
 
     @Override
     public void computeScroll() {
-
         if (mScroller.computeScrollOffset()) {
             if (mScrollBack == SCROLLBACK_HEADER) {
                 mHeaderView.setVisiableHeight(mScroller.getCurrY());
             } else {
+                UtilsLog.d("computeScroll+++++", mScroller.getCurrY());
                 mFooterView.setBottomMargin(mScroller.getCurrY());
             }
             postInvalidate();
@@ -392,10 +397,10 @@ public class XScrollView extends ScrollView{
     判断content是否到达了底端
      */
     private boolean contentToBottom(){
-        UtilsLog.d("mContentView.getBottom()+++getHeight()++getScrollY()+", mFooterView.getBottom() + "====" +getHeight() + "+++" + getScrollY());
-        int diff = (mContentView.getBottom()-(getHeight()+getScrollY()));
-        UtilsLog.d(" mFooterView.getHeight()+++" ,  mFooterView.getHeight());
+        UtilsLog.d("mFooterView.getBottom()+++getHeight()++getScrollY()+", mFooterView.getBottom() + "====" +getHeight() + "+++" + getScrollY());
+        int diff = (mFooterView.getBottom()-(getHeight()+getScrollY()));
+        UtilsLog.d(" mFooterView.getBottomMargin()+++" ,  mFooterView.getBottomMargin());
         UtilsLog.d("DIFF++++" , diff);
-        return diff <= 0;
+        return diff == 0 || mFooterView.getBottomMargin() > 0;
     }
 }

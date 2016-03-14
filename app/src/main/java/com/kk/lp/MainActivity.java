@@ -15,7 +15,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -46,13 +45,13 @@ import com.kk.lp.mvp.MVPActivity;
 import com.kk.lp.percentlayout.PercentLayoutFragment;
 import com.kk.lp.popupmenuandwindow.PopupMenuFragment;
 import com.kk.lp.scrollview.XScrollViewFragment;
-import com.kk.lp.support_lib_23_2.VectorDrawableActivity;
+import com.kk.lp.support23_2.VectorDrawableActivity;
+import com.kk.lp.support_lib_23_2.VectorDrawableLibActivity;
 import com.kk.lp.textview.TextViewLongClick;
 import com.kk.lp.touch.TouchGestureDetectorFragment;
 import com.kk.lp.viewdrag.ViewDragFragment;
 import com.kk.lp.wificommunication.client.ClientFragment;
 import com.kk.lp.wificommunication.server.ServerFragment;
-import com.mikepenz.iconics.context.IconicsLayoutInflater;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -61,8 +60,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //该处声明Android-Iconics，只有在layout布局文件对应的activity中声明，图片才能加载出来
-        LayoutInflaterCompat.setFactory(getLayoutInflater(), new IconicsLayoutInflater(getDelegate()));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -166,23 +163,26 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else if (id == R.id.FABFragment) {
             Intent intent = new Intent(this, MaterialDetailActivity.class);
             startActivity(intent);
-        }else if (id == R.id.vectorDrawable) {
+        } else if (id == R.id.vectorDrawable) {
             Intent intent = new Intent(this, VectorDrawableActivity.class);
             startActivity(intent);
-        }else if (id == R.id.chatHead) {
+        } else if (id == R.id.chatHead) {
             showOverlayWindowView();
-        }else if (id == R.id.glide_img) {
+        } else if (id == R.id.vectorDrawableActivity) {
+            Intent intent = new Intent(this, VectorDrawableLibActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.glide_img) {
             fragment = ImgWithGlideFragment.newInstance();
-        }else if (id == R.id.async_task_loader) {
+        } else if (id == R.id.async_task_loader) {
             fragment = AsyncTaskLoaderFragment.newInstance();
-        }else if (id == R.id.mvp) {
+        } else if (id == R.id.mvp) {
             Intent intent = new Intent(this, MVPActivity.class);
             startActivity(intent);
         }
-		
-if (fragment != null){
-    fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
-}
+
+        if (fragment != null) {
+            fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

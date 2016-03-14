@@ -23,12 +23,13 @@ public class XListViewFooter extends LinearLayout {
 	public final static int STATE_LOADING = 2;
 
 	private Context mContext;
-
+    private LinearLayout moreView;
 	private View mContentView;
 	private View mProgressBar;
 	private TextView mHintView;
 	/** 是否已展示全部内容 */
 	public boolean isShowAll;
+    private int moreViewHeight = 0;
 
     public int getCurrentState() {
         return currentState;
@@ -70,14 +71,17 @@ public class XListViewFooter extends LinearLayout {
 	public void setBottomMargin(int height) {
 		if (height < 0)
 			return;
-		LayoutParams lp = (LayoutParams) mContentView.getLayoutParams();
-		lp.bottomMargin = height;
-		mContentView.setLayoutParams(lp);
+        if (moreViewHeight == 0){
+            moreViewHeight = moreView.getHeight();
+        }
+		LayoutParams lp = (LayoutParams) moreView.getLayoutParams();
+		lp.height = moreViewHeight + height;
+        moreView.setLayoutParams(lp);
 	}
 
 	public int getBottomMargin() {
-		LayoutParams lp = (LayoutParams) mContentView.getLayoutParams();
-		return lp.bottomMargin;
+		LayoutParams lp = (LayoutParams) moreView.getLayoutParams();
+		return lp.height - moreViewHeight;
 	}
 
 	/**
@@ -116,7 +120,7 @@ public class XListViewFooter extends LinearLayout {
 
 	private void initView(Context context) {
 		mContext = context;
-		LinearLayout moreView = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.xlistview_footer, null);
+		moreView = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.xlistview_footer, null);
 		addView(moreView);
 		moreView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 

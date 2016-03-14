@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
           package="com.kk.lp"
           android:versionCode="1"
           android:versionName="1.0">
@@ -15,13 +14,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <!-- Facebook Messenger with Chat Head Demo -->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true"/>
 
     <application
+        android:name=".BaseApplication"
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -41,7 +41,7 @@
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
 
         <service
@@ -61,9 +61,15 @@
         <service
             android:name=".wificommunication.client.ReadDataService"
             android:exported="false"/>
-        <service android:name=".facebookchathead.ServiceChatHead"/>
-
-        <activity android:name=".support_lib_23_2.VectorDrawableActivity"
+        <service android:name=".facebookchathead.ServiceChatHead" />
+        <activity
+            android:name=".support23_2.VectorDrawableActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+	        <activity android:name=".support_lib_23_2.VectorDrawableLibActivity"
                   android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

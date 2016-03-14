@@ -49,11 +49,14 @@
               android:title="vectorDrawable" />
 	<item android:id="@+id/chatHead"
               android:title="chatHead" />
-        <item android:id="@+id/glide_img"
+	      <item android:id="@+id/vectorDrawableActivity"
+            android:title="VectorDrawableActivity" />
+<item android:id="@+id/glide_img"
               android:title="Glide图片展示" />
         <item android:id="@+id/async_task_loader"
               android:title="AsyncTaskLoader" />
         <item android:id="@+id/mvp"
               android:title="MVP架构原理" />
+
     </group>
 </menu>
