@@ -3,6 +3,7 @@ package com.kk.lp;
 import android.app.Application;
 import android.app.UiModeManager;
 import android.content.Context;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
@@ -17,6 +18,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         UiModeManager uiModeManager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);
+        initStrictMode();
         //获取系统设置下的nightMode，获取的该值是系统默认设置的，无法在自己应用中修改该系统默认值，
         // 但是可以通过设置改变自己应用下该UI的显示模式
         //测试时uiModeManager.getNightMode()，获取的该值是固定的；
@@ -34,4 +36,9 @@ public class BaseApplication extends Application {
 //        }
         super.onCreate();
     }
+
+    public void initStrictMode() {
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
+    }
+
 }

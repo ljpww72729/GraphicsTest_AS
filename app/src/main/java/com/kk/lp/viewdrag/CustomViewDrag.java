@@ -37,6 +37,7 @@ public class CustomViewDrag extends ViewGroup {
         //此处设置为默认的不绘制ondraw()方法，具体可参考http://blog.csdn.net/leehong2005/article/details/7299471
         setWillNotDraw(false);
         viewDragHelper = ViewDragHelper.create(this, new CustomDragCallback(this));
+        viewDragHelper.setEdgeTrackingEnabled(ViewDragHelper.EDGE_LEFT);
         paint = new Paint();
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -69,7 +70,7 @@ public class CustomViewDrag extends ViewGroup {
 
         @Override
         public boolean tryCaptureView(View child, int pointerId) {
-            return true;
+            return viewDragHelper.isEdgeTouched(ViewDragHelper.EDGE_LEFT, pointerId);
         }
 
         @Override
@@ -96,7 +97,10 @@ public class CustomViewDrag extends ViewGroup {
             mParentView.invalidate();
         }
 
-
+        @Override
+        public void onEdgeDragStarted(int edgeFlags, int pointerId) {
+            super.onEdgeDragStarted(edgeFlags, pointerId);
+        }
     }
 
 

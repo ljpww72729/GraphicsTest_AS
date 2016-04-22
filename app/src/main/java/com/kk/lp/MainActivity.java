@@ -45,11 +45,14 @@ import com.kk.lp.mvp.MVPActivity;
 import com.kk.lp.percentlayout.PercentLayoutFragment;
 import com.kk.lp.popupmenuandwindow.PopupMenuFragment;
 import com.kk.lp.scrollview.XScrollViewFragment;
+import com.kk.lp.slidingpane.SlidingPaneActivity;
 import com.kk.lp.support23_2.VectorDrawableActivity;
 import com.kk.lp.support_lib_23_2.VectorDrawableLibActivity;
+import com.kk.lp.textview.FocusChangeEditFragment;
 import com.kk.lp.textview.TextViewLongClick;
 import com.kk.lp.touch.TouchGestureDetectorFragment;
-import com.kk.lp.viewdrag.ViewDragFragment;
+import com.kk.lp.viewdrag.MyDrawerLayoutActivity;
+import com.kk.lp.viewdrag.ViewDragActivity;
 import com.kk.lp.wificommunication.client.ClientFragment;
 import com.kk.lp.wificommunication.server.ServerFragment;
 
@@ -157,7 +160,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else if (id == R.id.XScrollViewFragment) {
             fragment = XScrollViewFragment.newInstance();
         } else if (id == R.id.ViewDragFragment) {
-            fragment = ViewDragFragment.newInstance();
+//            fragment = ViewDragFragment.newInstance();
+            Intent intent = new Intent(this, ViewDragActivity.class);
+            startActivity(intent);
         } else if (id == R.id.TouchGestureDetectorFragment) {
             fragment = TouchGestureDetectorFragment.newInstance();
         } else if (id == R.id.FABFragment) {
@@ -178,7 +183,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else if (id == R.id.mvp) {
             Intent intent = new Intent(this, MVPActivity.class);
             startActivity(intent);
+        } else if (id == R.id.focusChange) {
+            fragment = FocusChangeEditFragment.newInstance();
+        }else if (id == R.id.myDrawerLayoutActivity) {
+            Intent intent = new Intent(this, MyDrawerLayoutActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.slidingPaneActivity) {
+            Intent intent = new Intent(this, SlidingPaneActivity.class);
+            startActivity(intent);
         }
+
+
 
         if (fragment != null) {
             fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
@@ -273,5 +288,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             // permissions this app might request
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    /**
+     * Notice that your app receives the onTrimMemory() callback with TRIM_MEMORY_UI_HIDDEN
+     * only when all the UI components of your app process become hidden from the user.
+     * 与onstop()不同之处在于，onstop()在跳转到其他页面时也会被调用，而onTrimMemory()只会在应用进程所有组件
+     * 都被的情况下才会被处罚调用
+     * @param level
+     */
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
     }
 }

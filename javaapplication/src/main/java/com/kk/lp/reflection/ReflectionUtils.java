@@ -48,5 +48,35 @@ public class ReflectionUtils {
         return null;
     }
 
+    /**
+     * 获取对象的 DeclaredField并设值
+     *
+     * @param clazz    : 对象
+     * @param fieldName : 属性名
+     * @return 父类中的属性对象
+     */
+    public static <T> T setDeclaredField(Class<T> clazz, String fieldName) {
+        SecurityManager securityManager = System.getSecurityManager();
+        System.out.println(securityManager);
+        Field field;
+            try {
+                T object = clazz.newInstance();
+                field = clazz.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                System.out.println(field.getGenericType().getTypeName());
+                if (field.getGenericType().getTypeName().equals("java.lang.String"))
+                {
+                    field.set(object,"测试");
+                }
+                return object;
+            } catch (NoSuchFieldException e) {
+//                e.printStackTrace();
+        } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        return null;
+    }
 
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="rectangle" >
+    <!-- 通过调整width的宽度，显示阴影的大小 -->
+    <size android:width="24px"/>
+    <!-- 颜色值是在mtrl支持库中取得的 -->
+    <gradient android:angle="180" android:startColor="@color/shadow_start_color" android:centerColor="@color/shadow_mid_color" android:endColor="@android:color/transparent" />
+
+</shape>
