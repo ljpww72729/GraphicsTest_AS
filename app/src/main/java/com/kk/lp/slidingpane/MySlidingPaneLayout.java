@@ -1397,15 +1397,22 @@ public class MySlidingPaneLayout extends ViewGroup {
 
         @Override
         public boolean tryCaptureView(View child, int pointerId) {
+            Log.d(TAG, "tryCaptureView() called with: " + "child = [" + child + "], pointerId = [" + pointerId + "]");
+
+
             if (mIsUnableToDrag) {
                 return false;
             }
-//如果是可拖动的视图则返回true
+        //如果是可拖动的视图则返回true
             return ((LayoutParams) child.getLayoutParams()).slideable;
+
+            //只能从边缘滑动
+//            return ((LayoutParams) child.getLayoutParams()).slideable && (mDragHelper.isEdgeTouched(ViewDragHelper.EDGE_LEFT, pointerId) || isOpen());
         }
 
         @Override
         public void onViewDragStateChanged(int state) {
+            Log.d(TAG, "onViewDragStateChanged() called with: " + "state = [" + state + "]");
             if (mDragHelper.getViewDragState() == ViewDragHelper.STATE_IDLE) {
                 if (mSlideOffset == 0) {
                     updateObscuredViewsVisibility(mSlideableView);
@@ -1420,16 +1427,19 @@ public class MySlidingPaneLayout extends ViewGroup {
 
         @Override
         public void onViewCaptured(View capturedChild, int activePointerId) {
+            Log.d(TAG, "onViewCaptured() called with: " + "capturedChild = [" + capturedChild + "], activePointerId = [" + activePointerId + "]");
             // Make all child views visible in preparation for sliding things around
             setAllChildrenVisible();
         }
 
         @Override
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
+            Log.d(TAG, "onViewPositionChanged() called with: " + "changedView = [" + changedView + "], left = [" + left + "], top = [" + top + "], dx = [" + dx + "], dy = [" + dy + "]");
             onPanelDragged(left);
             invalidate();
         }
 
+        //只有在fling释放的时候才会调用
         @Override
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
             final LayoutParams lp = (LayoutParams) releasedChild.getLayoutParams();
@@ -1452,13 +1462,17 @@ public class MySlidingPaneLayout extends ViewGroup {
             invalidate();
         }
 
+        //主要根据返回值是否大于0来判断是否应该移动视图，其次用来计算settleCapturedView时的duration
         @Override
         public int getViewHorizontalDragRange(View child) {
+            Log.d(TAG, "getViewHorizontalDragRange() called with: " + "child = [" + child + "]");
             return mSlideRange;
         }
 
+        //固定被拖动视图的水平位置
         @Override
         public int clampViewPositionHorizontal(View child, int left, int dx) {
+            Log.d(TAG, "clampViewPositionHorizontal() called with: " + "child = [" + child + "], left = [" + left + "], dx = [" + dx + "]");
             final LayoutParams lp = (LayoutParams) mSlideableView.getLayoutParams();
 
             final int newLeft;
@@ -1477,13 +1491,16 @@ public class MySlidingPaneLayout extends ViewGroup {
 
         @Override
         public int clampViewPositionVertical(View child, int top, int dy) {
+            Log.d(TAG, "clampViewPositionVertical() called with: " + "child = [" + child + "], top = [" + top + "], dy = [" + dy + "]");
             // Make sure we never move views vertically.
             // This could happen if the child has less height than its parent.
             return child.getTop();
         }
 
+        //从边缘划入的时候，有意图去滑动视图
         @Override
         public void onEdgeDragStarted(int edgeFlags, int pointerId) {
+            Log.d(TAG, "onEdgeDragStarted() called with: " + "edgeFlags = [" + edgeFlags + "], pointerId = [" + pointerId + "]");
             mDragHelper.captureChildView(mSlideableView, pointerId);
         }
     }
