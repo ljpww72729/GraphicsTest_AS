@@ -12,6 +12,9 @@
     </style>
     <style name="App_Theme" parent="AppBaseTheme">
     </style>
+    <style name="App_Theme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">

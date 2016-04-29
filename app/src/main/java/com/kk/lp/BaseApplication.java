@@ -13,6 +13,16 @@ import android.util.Log;
 public class BaseApplication extends Application {
 
     private final String TAG = BaseApplication.this.getClass().getSimpleName();
+    public boolean launched = false;
+    private static BaseApplication instance = null;
+
+    public BaseApplication() {
+        instance = this;
+    }
+
+    public static BaseApplication getInstance() {
+        return instance;
+    }
 
     @Override
     public void onCreate() {
