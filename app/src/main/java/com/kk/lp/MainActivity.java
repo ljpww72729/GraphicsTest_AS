@@ -53,6 +53,7 @@ import com.kk.lp.textview.TextViewLongClick;
 import com.kk.lp.touch.TouchGestureDetectorFragment;
 import com.kk.lp.viewdrag.MyDrawerLayoutActivity;
 import com.kk.lp.viewdrag.ViewDragActivity;
+import com.kk.lp.volley.VolleyFragment;
 import com.kk.lp.wificommunication.client.ClientFragment;
 import com.kk.lp.wificommunication.server.ServerFragment;
 
@@ -91,8 +92,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            moveTaskToBack(true);
         }
+
     }
 
     @Override
@@ -191,6 +193,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }else if (id == R.id.slidingPaneActivity) {
             Intent intent = new Intent(this, SlidingPaneActivity.class);
             startActivity(intent);
+        } else if (id == R.id.volley) {
+            fragment = VolleyFragment.newInstance();
         }
 
 

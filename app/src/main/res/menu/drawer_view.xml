@@ -95,6 +95,9 @@
         <item
             android:id="@+id/slidingPaneActivity"
             android:title="sliding布局"/>
+        <item
+            android:id="@+id/volley"
+            android:title="volley获取数据"/>
 
     </group>
 </menu>
