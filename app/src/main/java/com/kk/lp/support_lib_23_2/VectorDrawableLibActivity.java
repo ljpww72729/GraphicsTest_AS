@@ -11,7 +11,6 @@ import android.widget.ImageView;
 
 import com.kk.lp.BaseActivity;
 import com.kk.lp.R;
-import com.kk.lp.material_design.MaterialDetailActivity;
 
 public class VectorDrawableLibActivity extends BaseActivity {
 
@@ -27,12 +26,19 @@ public class VectorDrawableLibActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ImageView img_vector = (ImageView) findViewById(R.id.img_vector);
-        img_vector.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(VectorDrawableLibActivity.this, MaterialDetailActivity.class));
-            }
-        });
+        if (img_vector != null) {
+            img_vector.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        Class cls = Class.forName("com.kk.lp.material_design.MaterialDetailActivity");
+                        startActivity(new Intent(VectorDrawableLibActivity.this, cls));
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
 
 
     }

@@ -36,7 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
@@ -45,7 +44,6 @@
             android:name=".material_design.MaterialDetailActivity"
             android:label="@string/app_name"
             android:parentActivityName=".MainActivity">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
@@ -96,6 +94,8 @@
         <activity android:name=".slidingpane.SlidingPaneActivity">
         </activity>
         <activity android:name=".viewdrag.ViewDragActivity">
+        </activity>
+        <activity android:name=".welcome.WelcomeActivity">
         </activity>
     </application>
 

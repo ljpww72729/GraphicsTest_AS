@@ -23,24 +23,25 @@ android {
 //    def buildDir = file(new File("build"))
 //    commandLine 'cmd', "$lockhunter", '/delete', '/silent', buildDir
 //}
-ext{
-    supportVersion="23.3.0"
+ext {
+    supportVersion = "23.4.0"
 }
 dependencies {
     compile files('libs/androidannotations-api-3.2.jar')
     compile files('libs/eventbus.jar')
     compile "com.android.support:support-v4:${supportVersion}"
     compile "com.android.support:appcompat-v7:${supportVersion}"
-    compile 'com.jakewharton:butterknife:7.0.1'
     compile "com.android.support:percent:${supportVersion}"
     compile "com.android.support:design:${supportVersion}"
     compile "com.android.support:support-vector-drawable:${supportVersion}"
-    compile 'com.mikepenz:iconics-core:2.5.5@aar'
-    compile 'com.mikepenz:typeicons-typeface:2.0.7.1@aar'
     compile "com.android.support:support-vector-drawable:${supportVersion}"
     compile "com.android.support:animated-vector-drawable:${supportVersion}"
+    compile project(':volley')
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.mikepenz:iconics-core:2.5.5@aar'
+    compile 'com.mikepenz:typeicons-typeface:2.0.7.1@aar'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.alibaba:fastjson:1.1.46.android'
-    compile project(':volley')
+    compile 'com.android.support:support-v4:23.4.0'
 }

@@ -3,6 +3,8 @@ package com.kk.lp;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.kk.lp.welcome.WelcomeActivity;
+
 /**
  * Created by lipeng on 2016 4-29.
  */
@@ -23,7 +25,7 @@ public class SplashActivity extends BaseActivity {
 //            public void run() {
 //                // This method will be executed once the timer is over
 //                // Start your app main activity
-                Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                Intent i = new Intent(SplashActivity.this, WelcomeActivity.class);
                 startActivity(i);
                 // close this activity
                 finish();

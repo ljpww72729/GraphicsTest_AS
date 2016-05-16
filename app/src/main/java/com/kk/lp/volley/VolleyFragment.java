@@ -29,7 +29,7 @@ public class VolleyFragment extends BaseFragment {
     TextView response_content;
     Button get_data;
     RequestQueue requestQueue;
-    String url = "https://www.taobao.com";
+    String url = "https://www.baidu.com";
     StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {

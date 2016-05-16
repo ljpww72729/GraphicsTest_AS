@@ -16,6 +16,7 @@ import android.view.animation.Interpolator;
 
 /**
  * Created by lipeng on 2016 4-28.
+ *  bottomNavigation在执行动画的时候还是有问题的，需要完善
  */
 public class LPBottomNavigationBehavior extends CoordinatorLayout.Behavior {
 
@@ -63,6 +64,7 @@ public class LPBottomNavigationBehavior extends CoordinatorLayout.Behavior {
         if (child.isShown()) {
             ViewCompat.offsetTopAndBottom(child, mMinOffset);
         }else {
+            child.setVisibility(View.INVISIBLE);
             ViewCompat.offsetTopAndBottom(child, mMaxOffset);
         }
         return true;
@@ -97,7 +99,7 @@ public class LPBottomNavigationBehavior extends CoordinatorLayout.Behavior {
      */
     private void hideView(View child) {
         Log.d(TAG, "hideView: child.getTop() == " + child.getTop());
-        if (!isAnimationing && child.getTop() == mMinOffset) {
+        if (!isAnimationing && child.getVisibility() == View.VISIBLE) {
             isAnimationing = true;
             animateViewOut(child);
         }
@@ -124,15 +126,16 @@ public class LPBottomNavigationBehavior extends CoordinatorLayout.Behavior {
             Animation animation = AnimationUtils.loadAnimation(child.getContext(), android.support.design.R.anim.design_snackbar_out);
             animation.setInterpolator(FAST_OUT_SLOW_IN_INTERPOLATOR);
             animation.setDuration(ANIMATION_DURATION);
+            animation.setFillAfter(true);
             animation.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation animation) {
-
                 }
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
                     isAnimationing = false;
+                    child.setVisibility(View.INVISIBLE);
                 }
 
                 @Override
@@ -151,7 +154,7 @@ public class LPBottomNavigationBehavior extends CoordinatorLayout.Behavior {
      */
     private void showView(View child) {
         Log.d(TAG, "showView: child.getTop() == " + child.getTop());
-        if (!isAnimationing && child.getTop() == mMinOffset) {
+        if (!isAnimationing && child.getVisibility() == View.INVISIBLE) {
             isAnimationing = true;
             animateViewIn(child);
         }
@@ -183,15 +186,17 @@ public class LPBottomNavigationBehavior extends CoordinatorLayout.Behavior {
                     android.support.design.R.anim.design_snackbar_in);
             anim.setInterpolator(FAST_OUT_SLOW_IN_INTERPOLATOR);
             anim.setDuration(ANIMATION_DURATION);
+            anim.setFillAfter(true);
             anim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationEnd(Animation animation) {
                     isAnimationing = false;
-
+                    mView.setVisibility(View.VISIBLE);
                 }
 
                 @Override
                 public void onAnimationStart(Animation animation) {
+                    mView.setVisibility(View.VISIBLE);
                 }
 
                 @Override

@@ -25,6 +25,8 @@ public class BaseApplication extends Application {
 
     @Override
     public void onCreate() {
+        //设置app支持vector资源的使用，可参考https://plus.google.com/+AndroidDevelopers/posts/B7QhFkWZ6YX
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         UiModeManager uiModeManager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);
         initStrictMode();
