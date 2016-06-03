@@ -1,28 +1,32 @@
 package com.kk.lp.welcome;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kk.lp.BaseFragment;
+import com.kk.lp.MainActivity;
 import com.kk.lp.R;
 
 public class WelcomeFragment extends BaseFragment implements PageTransformerDelegate{
 
     public static final String ARG_PARAM = "param";
-    public static final String ARG_POSITION = "position";
+    public static final String ARG_INDICATOR = "indicator";
     private static final String TAG = "BaseFragment";
     private Welcome welcome;
-    private int position;
+    private int indicator;
     private TextView wel_title;
     private ImageView wel_img;
+    private Button wel_start;
 
     public WelcomeFragment() {
         // Required empty public constructor
@@ -35,11 +39,11 @@ public class WelcomeFragment extends BaseFragment implements PageTransformerDele
      * @return A new instance of fragment WelcomeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WelcomeFragment newInstance(Welcome welcome, int position) {
+    public static WelcomeFragment newInstance(Welcome welcome, int indicator) {
         WelcomeFragment fragment = new WelcomeFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(ARG_PARAM, welcome);
-        bundle.putInt(ARG_POSITION, position);
+        bundle.putInt(ARG_INDICATOR, indicator);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -50,7 +54,7 @@ public class WelcomeFragment extends BaseFragment implements PageTransformerDele
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             welcome = (Welcome) getArguments().getSerializable(ARG_PARAM);
-            position = getArguments().getInt(ARG_POSITION);
+            indicator = getArguments().getInt(ARG_INDICATOR);
         }
     }
 
@@ -63,10 +67,21 @@ public class WelcomeFragment extends BaseFragment implements PageTransformerDele
         wel_title = (TextView) view.findViewById(R.id.wel_title);
         TextView wel_des = (TextView) view.findViewById(R.id.wel_des);
         wel_img = (ImageView) view.findViewById(R.id.wel_img);
+        wel_start = (Button) view.findViewById(R.id.wel_start);
         wel_bg.setBackgroundResource(welcome.getBackgroundColor());
         wel_title.setText(welcome.getTitle());
         wel_des.setText(welcome.getDescription());
         wel_img.setImageResource(welcome.getImg());
+        if (indicator == 2){
+            wel_start.setVisibility(View.VISIBLE);
+            wel_start.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getActivity(), MainActivity.class));
+                    getActivity().finish();
+                }
+            });
+        }
         view.setTag(this);
         return view;
     }
@@ -98,6 +113,15 @@ public class WelcomeFragment extends BaseFragment implements PageTransformerDele
 
     @Override
     public void transformPage(float position) {
-        ViewCompat.setTranslationX(wel_img, -position);
+        if (indicator == 0){
+            ViewCompat.setTranslationX(wel_img, getView().getWidth() * position);
+        }else if (indicator == 1){
+            ViewCompat.setAlpha(wel_img, 1 - Math.abs(position));
+            ViewCompat.setTranslationX(wel_img, getView().getWidth() * position);
+        }else{
+            ViewCompat.setScaleX(wel_img, 1-Math.abs(position));
+            ViewCompat.setScaleY(wel_img, 1-Math.abs(position));
+            ViewCompat.setAlpha(wel_start, 1 - Math.abs(position));
+        }
     }
 }

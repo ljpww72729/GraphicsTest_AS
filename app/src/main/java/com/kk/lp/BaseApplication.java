@@ -7,6 +7,8 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
+import com.squareup.leakcanary.LeakCanary;
+
 /**
  * Created by ljpww72729 on 16/3/6.
  */
@@ -46,6 +48,7 @@ public class BaseApplication extends Application {
 //            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 //        }
         super.onCreate();
+        LeakCanary.install(this);
     }
 
     public void initStrictMode() {

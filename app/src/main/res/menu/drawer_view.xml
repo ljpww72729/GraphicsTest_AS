@@ -98,6 +98,9 @@
         <item
             android:id="@+id/volley"
             android:title="volley获取数据"/>
+        <item
+            android:id="@+id/custom_linearlayout"
+            android:title="自定义布局测试"/>
 
     </group>
 </menu>

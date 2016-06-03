@@ -51,6 +51,7 @@ import com.kk.lp.support_lib_23_2.VectorDrawableLibActivity;
 import com.kk.lp.textview.FocusChangeEditFragment;
 import com.kk.lp.textview.TextViewLongClick;
 import com.kk.lp.touch.TouchGestureDetectorFragment;
+import com.kk.lp.view.CustomViewFragment;
 import com.kk.lp.viewdrag.MyDrawerLayoutActivity;
 import com.kk.lp.viewdrag.ViewDragActivity;
 import com.kk.lp.volley.VolleyFragment;
@@ -195,6 +196,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             startActivity(intent);
         } else if (id == R.id.volley) {
             fragment = VolleyFragment.newInstance();
+        } else if (id == R.id.custom_linearlayout) {
+            fragment = CustomViewFragment.newInstance();
         }
 
 

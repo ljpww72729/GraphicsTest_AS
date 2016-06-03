@@ -117,6 +117,7 @@ public class LPBottomNavigationBehavior extends CoordinatorLayout.Behavior {
                         @Override
                         public void onAnimationEnd(View view) {
                             isAnimationing = false;
+                            child.setVisibility(View.INVISIBLE);
                             Log.d(TAG, "animateViewOut: child.getTop() == " + child.getTop());
 //                            child.setVisibility(View.INVISIBLE);
                         }
@@ -172,11 +173,13 @@ public class LPBottomNavigationBehavior extends CoordinatorLayout.Behavior {
                         public void onAnimationStart(View view) {
 //                            mView.animateChildrenIn(ANIMATION_DURATION - ANIMATION_FADE_DURATION,
 //                                    ANIMATION_FADE_DURATION);
+                            mView.setVisibility(View.VISIBLE);
                         }
 
                         @Override
                         public void onAnimationEnd(View view) {
                             isAnimationing = false;
+                            mView.setVisibility(View.VISIBLE);
                             Log.d(TAG, "onAnimationEnd: child.getTop() == " + view.getTop());
 //                            mView.setVisibility(View.VISIBLE);
                         }
