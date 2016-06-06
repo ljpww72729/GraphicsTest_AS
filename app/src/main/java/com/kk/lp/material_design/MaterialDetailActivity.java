@@ -9,10 +9,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,12 +31,14 @@ import com.kk.lp.R;
  * Created by lipeng on 2-19.
  */
 public class MaterialDetailActivity extends BaseActivity {
+    private static final String TAG = "MaterialDetailActivity";
     static String baconTitle = "Bacon";
     static String baconText = "Bacon ipsum dolor amet pork belly meatball kevin spare ribs. Frankfurter swine corned beef meatloaf, strip steak.";
     static String veggieTitle = "Veggie";
     static String veggieText = "Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.";
     MyBottomBehavior bsb;
     View bottom_sheet;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,11 +49,35 @@ public class MaterialDetailActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         int dp = (int) Resources.getSystem().getDisplayMetrics().density;
         ((CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout)).setTitle(getString(R.string.app_name));
-        RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerview);
+        final RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerview);
         rv.setLayoutManager(new LinearLayoutManager(this));
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MaterialDetailActivity.this, "yes", Toast.LENGTH_LONG).show();
+//                rv.scrollToPosition(6);
+//                rv.smoothScrollToPosition(6);
+                rv.smoothScrollBy(0, 1000);
+            }
+        });
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                Log.d(TAG, "onScrolled() called with: " + "recyclerView = [" + recyclerView + "], dx = [" + dx + "], dy = [" + dy + "]bottom===" + recyclerView.getBottom() + "++top====" + recyclerView.getTop() + "+++getScrollY===" + recyclerView.getScrollY());
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+
         rv.setAdapter(new RecyclerView.Adapter<ViewHolder>() {
             @Override
             public ViewHolder onCreateViewHolder(ViewGroup parent, int position) {
+                Log.d(TAG, "onCreateViewHolder() called with: " + "parent = [" + parent + "], position = [" + position + "] bottom===" + parent.getBottom() + "++top====" + parent.getTop());
                 return new ViewHolder(getLayoutInflater().inflate(R.layout.list_item, parent, false));
             }
 
@@ -63,6 +91,8 @@ public class MaterialDetailActivity extends BaseActivity {
             public int getItemCount() {
                 return 10;
             }
+
+
         });
         bottom_sheet = findViewById(R.id.bottom_sheet);
         bsb = MyBottomBehavior.from(bottom_sheet);
@@ -104,24 +134,23 @@ public class MaterialDetailActivity extends BaseActivity {
         });
 
         LinearLayout bottom_sheet_content = (LinearLayout) findViewById(R.id.bottom_sheet_content);
-        if (bottom_sheet_content != null){
+        if (bottom_sheet_content != null) {
             for (int i = 0; i < bottom_sheet_content.getChildCount(); i++) {
                 bottom_sheet_content.getChildAt(i).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showSnackBar(((TextView)v).getText().toString());
+                        showSnackBar(((TextView) v).getText().toString());
                     }
                 });
             }
         }
 
 
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
 //                System.exit(0);
                 finish();
@@ -130,7 +159,7 @@ public class MaterialDetailActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    void showSnackBar(String message){
+    void showSnackBar(String message) {
         Snackbar.make(bottom_sheet, message, Snackbar.LENGTH_SHORT).show();
     }
 

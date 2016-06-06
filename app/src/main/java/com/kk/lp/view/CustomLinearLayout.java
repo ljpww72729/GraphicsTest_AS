@@ -2,6 +2,7 @@ package com.kk.lp.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -34,17 +35,22 @@ public class CustomLinearLayout extends ViewGroup {
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
         int layoutHeight = 0;
         int maxLayoutHeight = -1;
-        layoutHeight = maxLayoutHeight = heightSize - getPaddingTop() - getPaddingBottom();
-        int count = getChildCount();
-        int remainHeight = maxLayoutHeight;
-        for (int i = 0; i < count; i++){
-            View childView = getChildAt(i);
-            measureChild(childView, widthMeasureSpec, heightMeasureSpec);
-            int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(childView.getMeasuredWidth(), MeasureSpec.EXACTLY);
-            int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(100, MeasureSpec.EXACTLY);
-            childView.measure(childWidthMeasureSpec, childHeightMeasureSpec);
-            remainHeight -= childView.getMeasuredHeight();
+        if (heightMode == MeasureSpec.EXACTLY) {
+            layoutHeight = maxLayoutHeight = heightSize;
+        } else if (heightMode == MeasureSpec.AT_MOST) {
+            layoutHeight = maxLayoutHeight = heightSize - getPaddingTop() - getPaddingBottom();
         }
+        int count = getChildCount();
+        int childTotalHeight = 0;
+        for (int i = 0; i < count; i++) {
+            final View childView = getChildAt(i);
+            measureChild(childView, widthMeasureSpec, heightMeasureSpec);
+            int childWidthMeasure = MeasureSpec.makeMeasureSpec(childView.getMeasuredWidth(), MeasureSpec.EXACTLY);
+            int childHeightMeasure = MeasureSpec.makeMeasureSpec(childView.getMeasuredHeight() * 2, MeasureSpec.EXACTLY);
+            childView.measure(childWidthMeasure, childHeightMeasure);
+            childTotalHeight += childView.getMeasuredHeight();
+        }
+        heightSize = Math.max(childTotalHeight, getSuggestedMinimumHeight());
         setMeasuredDimension(widthSize, heightSize);
 //        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
@@ -58,19 +64,30 @@ public class CustomLinearLayout extends ViewGroup {
         int right = r;
         int bottom = b;
 
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             View childView = getChildAt(i);
-            childView.layout(left, top, left + getWidth(), top + getHeight());
-            top += childView.getHeight();
+            childView.layout(left, top, left + childView.getMeasuredWidth(), top + childView.getMeasuredHeight());
+            top += childView.getMeasuredHeight();
         }
+    }
+
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+        super.dispatchDraw(canvas);
     }
 
     @Override
     protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
         Log.d(TAG, "drawChild() called with: " + "canvas = [" + canvas.isOpaque() + "], child = [" + child + "], drawingTime = [" + drawingTime + "]");
-//        canvas.clipRect(0,5,50,50);
-//        child.draw(canvas);
-        return super.drawChild(canvas, child, drawingTime);
+        boolean result = false;
+        Rect childeRect = new Rect();
+        canvas.save();
+        canvas.getClipBounds(childeRect);
+//        canvas.clipRect(childeRect.left,childeRect.top,childeRect.right / 4,childeRect.bottom);
+        canvas.clipRect(child.getLeft(),child.getTop(),child.getRight() / 2,child.getBottom());
+        result = super.drawChild(canvas, child, drawingTime);
+        canvas.restore();
+        return result;
     }
 
     @Override
@@ -83,5 +100,10 @@ public class CustomLinearLayout extends ViewGroup {
     public void requestLayout() {
         Log.d(TAG, "requestLayout() called with: " + "");
         super.requestLayout();
+    }
+
+    @Override
+    protected LayoutParams generateDefaultLayoutParams() {
+        return new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
     }
 }

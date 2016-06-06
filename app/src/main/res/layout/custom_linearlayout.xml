@@ -3,17 +3,45 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green">
+    android:background="@color/black">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="10dp"
-        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:background="@color/green"
         android:text="abc"/>
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="10dp"
-        android:background="@color/white"
-        android:text="abc"/>
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:text="abcdef"/>
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:text="abcd"/>
+    <com.kk.lp.view.CustomLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:background="@color/green"
+            android:text="abc"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="abcdef"/>
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:text="abcd"/>
+
+    </com.kk.lp.view.CustomLinearLayout>
 </com.kk.lp.view.CustomLinearLayout>
