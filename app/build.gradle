@@ -10,7 +10,7 @@ android {
     }
     defaultConfig {
         applicationId "com.kk.lp"
-        minSdkVersion 10
+        minSdkVersion 14
         targetSdkVersion 23
         vectorDrawables.useSupportLibrary = true
     }
