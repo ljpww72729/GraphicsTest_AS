@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/start_animation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始视图动画"/>
+
+        <Button
+            android:id="@+id/start_animator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始属性动画"/>
+
+        <LinearLayout
+            android:id="@+id/lay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/green"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"/>
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Button"/>
+
+        </LinearLayout>
+<View
+    android:layout_width="match_parent"
+    android:layout_height="800dp"
+    android:background="@color/black"/>
+    </LinearLayout>
+</ScrollView>

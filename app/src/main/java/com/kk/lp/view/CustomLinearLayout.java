@@ -50,20 +50,22 @@ public class CustomLinearLayout extends ViewGroup {
             childView.measure(childWidthMeasure, childHeightMeasure);
             childTotalHeight += childView.getMeasuredHeight();
         }
-        heightSize = Math.max(childTotalHeight, getSuggestedMinimumHeight());
+        heightSize = Math.max(childTotalHeight + getPaddingTop() + getPaddingBottom(), getSuggestedMinimumHeight());
         setMeasuredDimension(widthSize, heightSize);
 //        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        Log.d(TAG, "onLayout() called with: " + "changed = [" + changed + "], l = [" + l + "], t = [" + t + "], r = [" + r + "], b = [" + b + "]");
+        Log.d(TAG, "onLayout: ");
+//        Log.d(TAG, "onLayout() called with: " + "changed = [" + changed + "], l = [" + l + "], t = [" + t + "], r = [" + r + "], b = [" + b + "]");
         int count = getChildCount();
-        int left = l;
-        int top = t;
+        int left = getPaddingLeft();
+        int top = getPaddingTop();
         int right = r;
         int bottom = b;
 
+        // 如果是绘制子孩子，那么left，top不是参数l,t，因为l,t指的是当前布局相对于父布局的位置
         for (int i = 0; i < count; i++) {
             View childView = getChildAt(i);
             childView.layout(left, top, left + childView.getMeasuredWidth(), top + childView.getMeasuredHeight());
@@ -78,7 +80,8 @@ public class CustomLinearLayout extends ViewGroup {
 
     @Override
     protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
-        Log.d(TAG, "drawChild() called with: " + "canvas = [" + canvas.isOpaque() + "], child = [" + child + "], drawingTime = [" + drawingTime + "]");
+        Log.d(TAG, "drawChild: ");
+//        Log.d(TAG, "drawChild() called with: " + "canvas = [" + canvas.isOpaque() + "], child = [" + child + "], drawingTime = [" + drawingTime + "]");
         boolean result = false;
         Rect childeRect = new Rect();
         canvas.save();
@@ -92,13 +95,15 @@ public class CustomLinearLayout extends ViewGroup {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Log.d(TAG, "onDraw() called with: " + "canvas = [" + canvas + "]");
+        Log.d(TAG, "onDraw: ");
+//        Log.d(TAG, "onDraw() called with: " + "canvas = [" + canvas + "]");
         super.onDraw(canvas);
     }
 
     @Override
     public void requestLayout() {
-        Log.d(TAG, "requestLayout() called with: " + "");
+        Log.d(TAG, "requestLayout: ");
+//        Log.d(TAG, "requestLayout() called with: " + "");
         super.requestLayout();
     }
 

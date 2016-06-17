@@ -2,7 +2,9 @@
 <com.kk.lp.view.CustomLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="15dp"
     android:background="@color/black">
 
     <TextView
@@ -21,27 +23,15 @@
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         android:text="abcd"/>
-    <com.kk.lp.view.CustomLinearLayout
-        android:layout_width="match_parent"
+
+    <com.kk.lp.view.CustomTextView
+        android:id="@+id/ct_one"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/black">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="100px"
-            android:background="@color/green"
-            android:text="abc"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:text="abcdef"/>
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:text="abcd"/>
-
-    </com.kk.lp.view.CustomLinearLayout>
+        android:background="@color/colorAccent"/>
+<Button
+    android:id="@+id/set_bg"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="设置背景色"/>
 </com.kk.lp.view.CustomLinearLayout>

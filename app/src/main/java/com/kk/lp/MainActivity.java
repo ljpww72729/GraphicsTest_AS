@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.kk.lp.animation.AnimationFragment;
 import com.kk.lp.annotation.AnnotationFragment_;
 import com.kk.lp.async.AsyncFragment;
 import com.kk.lp.button.ButtonFragment;
@@ -198,6 +199,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             fragment = VolleyFragment.newInstance();
         } else if (id == R.id.custom_linearlayout) {
             fragment = CustomViewFragment.newInstance();
+        }
+        else if (id == R.id.AnimationFragment) {
+            fragment = AnimationFragment.newInstance();
         }
 
 
