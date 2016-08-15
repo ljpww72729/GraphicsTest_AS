@@ -11,12 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.kk.lp.BaseFragment;
 import com.kk.lp.R;
 
@@ -32,7 +26,7 @@ public class VolleyFragment extends BaseFragment {
     TextView response_content;
     EditText host,ip, suffix;
     Button get_data;
-    RequestQueue requestQueue;
+//    RequestQueue requestQueue;
     String url = "https://www.baidu.com";
     public static VolleyFragment newInstance() {
 
@@ -52,41 +46,41 @@ public class VolleyFragment extends BaseFragment {
         ip = (EditText) view.findViewById(R.id.ip);
         suffix = (EditText) view.findViewById(R.id.suffix);
         response_content = (TextView) view.findViewById(R.id.response_content);
-        get_data.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestQueue.cancelAll(TAG);
-                url = host.getText().toString() + ip.getText().toString() + suffix.getText().toString();
-                StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Snackbar.make(getView(), "success", Snackbar.LENGTH_SHORT).show();
-                        String s = new String(response.getBytes(Charset.forName("UTF-8")));
-                        response_content.setText(s);
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Snackbar.make(getView(), "error", Snackbar.LENGTH_SHORT).show();
-                        response_content.setText(error.getMessage());
-                    }
-                });
-                request.setTag(TAG);
-                requestQueue.add(request);
-            }
-        });
+//        get_data.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                requestQueue.cancelAll(TAG);
+//                url = host.getText().toString() + ip.getText().toString() + suffix.getText().toString();
+//                StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        Snackbar.make(getView(), "success", Snackbar.LENGTH_SHORT).show();
+//                        String s = new String(response.getBytes(Charset.forName("UTF-8")));
+//                        response_content.setText(s);
+//                    }
+//                }, new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Snackbar.make(getView(), "error", Snackbar.LENGTH_SHORT).show();
+//                        response_content.setText(error.getMessage());
+//                    }
+//                });
+//                request.setTag(TAG);
+//                requestQueue.add(request);
+//            }
+//        });
         return view;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        requestQueue = Volley.newRequestQueue(this.getActivity());
+//        requestQueue = Volley.newRequestQueue(this.getActivity());
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        requestQueue.cancelAll(TAG);
+//        requestQueue.cancelAll(TAG);
     }
 }

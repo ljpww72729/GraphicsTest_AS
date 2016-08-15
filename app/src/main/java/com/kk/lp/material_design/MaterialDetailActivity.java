@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -36,7 +37,7 @@ public class MaterialDetailActivity extends BaseActivity {
     static String baconText = "Bacon ipsum dolor amet pork belly meatball kevin spare ribs. Frankfurter swine corned beef meatloaf, strip steak.";
     static String veggieTitle = "Veggie";
     static String veggieText = "Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.";
-    MyBottomBehavior bsb;
+    BottomSheetBehavior bsb;
     View bottom_sheet;
     FloatingActionButton fab;
 
@@ -95,11 +96,11 @@ public class MaterialDetailActivity extends BaseActivity {
 
         });
         bottom_sheet = findViewById(R.id.bottom_sheet);
-        bsb = MyBottomBehavior.from(bottom_sheet);
-        bsb.setState(MyBottomBehavior.STATE_HIDDEN);
-        bsb.setBottomSheetCallback(new MyBottomBehavior.BottomSheetCallback() {
+        bsb = BottomSheetBehavior.from(bottom_sheet);
+        bsb.setState(BottomSheetBehavior.STATE_HIDDEN);
+        bsb.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
-            public void onStateChanged(@NonNull View bottomSheet, @MyBottomBehavior.State int newState) {
+            public void onStateChanged(@NonNull View bottomSheet, @BottomSheetBehavior.State int newState) {
 
             }
 
@@ -112,10 +113,10 @@ public class MaterialDetailActivity extends BaseActivity {
             @Override
             public void onItemClicked(final RecyclerView recyclerView, int position, View v) {
                 if (position % 2 == 0) {
-                    if (bsb.getState() != MyBottomBehavior.STATE_EXPANDED) {
-                        bsb.setState(MyBottomBehavior.STATE_EXPANDED);
+                    if (bsb.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                        bsb.setState(BottomSheetBehavior.STATE_EXPANDED);
                     } else {
-                        bsb.setState(MyBottomBehavior.STATE_COLLAPSED);
+                        bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     }
                 } else {
                     BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MaterialDetailActivity.this);

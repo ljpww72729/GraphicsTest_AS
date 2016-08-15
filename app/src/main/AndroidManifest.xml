@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.kk.lp"
-          android:versionCode="1"
-          android:versionName="1.0">
+    package="com.kk.lp"
+    android:versionCode="1"
+    android:versionName="1.0">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
 
     <!-- Facebook Messenger with Chat Head Demo -->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="true"/>
+        android:required="true" />
 
     <application
         android:name=".BaseApplication"
@@ -30,15 +31,17 @@
             android:name=".SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/App_Theme.Launcher">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:launchMode="singleTask"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".material_design.MaterialDetailActivity"
@@ -46,56 +49,97 @@
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
 
         <service
             android:name=".wificommunication.server.SocketListenerService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.kk.lp.socketlistenerservice"/>
+                <action android:name="com.kk.lp.socketlistenerservice" />
             </intent-filter>
         </service>
         <service
             android:name=".wificommunication.client.ClientSocketService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.kk.lp.clientsocketservice"/>
+                <action android:name="com.kk.lp.clientsocketservice" />
             </intent-filter>
         </service>
         <service
             android:name=".wificommunication.client.ReadDataService"
-            android:exported="false"/>
-        <service android:name=".facebookchathead.ServiceChatHead"/>
+            android:exported="false" />
+        <service android:name=".facebookchathead.ServiceChatHead" />
 
         <activity
             android:name=".support23_2.VectorDrawableActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".support_lib_23_2.VectorDrawableLibActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".mvp.MVPActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
-        <activity android:name=".viewdrag.MyDrawerLayoutActivity">
+        <activity android:name=".viewdrag.MyDrawerLayoutActivity" />
+        <activity android:name=".slidingpane.SlidingPaneActivity" />
+        <activity android:name=".viewdrag.ViewDragActivity" />
+        <activity android:name=".welcome.WelcomeActivity" />
+        <activity android:name=".deviceInfo.DeviceInfoActivity" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="kklp"/>
+            </intent-filter>
+            <!-- APP Links方式,Android 23版本及以后支持 -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="lkme.cc"
+                    android:pathPrefix="/AfC"
+                    android:scheme="https" />
+                <data
+                    android:host="lkme.cc"
+                    android:pathPrefix="/AfC"
+                    android:scheme="http" />
+                <!--<data-->
+                <!--android:host="www.lkme.cc"-->
+                <!--android:pathPrefix="/AfC"-->
+                <!--android:scheme="https" />-->
+                <!--<data-->
+                <!--android:host="www.lkme.cc"-->
+                <!--android:pathPrefix="/AfC"-->
+                <!--android:scheme="http" />-->
+            </intent-filter>
+
         </activity>
-        <activity android:name=".slidingpane.SlidingPaneActivity">
-        </activity>
-        <activity android:name=".viewdrag.ViewDragActivity">
-        </activity>
-        <activity android:name=".welcome.WelcomeActivity">
+        <activity android:name=".deep_link.StartOtherAppActivity" >
+            <!--android:theme="@android:style/Theme.NoDisplay" 不在栈中加入该activity-->
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="kklp" android:host="com.kk.lp"/>
+            </intent-filter>
+
         </activity>
     </application>
 

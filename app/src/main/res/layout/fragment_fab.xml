@@ -50,7 +50,7 @@
         android:layout_height="200dp"
         android:background="@color/green"
         app:behavior_hideable="true"
-        app:layout_behavior="com.kk.lp.material_design.MyBottomBehavior"
+        app:layout_behavior="@string/bottom_sheet_behavior"
         >
 
         <LinearLayout

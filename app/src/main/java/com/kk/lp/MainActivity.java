@@ -19,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,8 @@ import com.kk.lp.animation.AnimationFragment;
 import com.kk.lp.annotation.AnnotationFragment_;
 import com.kk.lp.async.AsyncFragment;
 import com.kk.lp.button.ButtonFragment;
+import com.kk.lp.deep_link.StartOtherAppActivity;
+import com.kk.lp.deviceInfo.DeviceInfoActivity;
 import com.kk.lp.facebookchathead.ServiceChatHead;
 import com.kk.lp.glide.ImgWithGlideFragment;
 import com.kk.lp.graphicstest.ArcsFragment;
@@ -62,6 +65,7 @@ import com.kk.lp.wificommunication.server.ServerFragment;
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final int MY_PERMISSIONS_REQUEST_SYSTEM_ALTER_WINDOW = 0;
+    private static final String TAG = "MainActivity";
     private DrawerLayout mDrawerLayout;
 
     @Override
@@ -83,6 +87,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_drawer);
         navigationView.setNavigationItemSelectedListener(this);
+        Log.i(TAG, "onCreate: " + Build.MODEL);
     }
 
     /**
@@ -202,9 +207,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
         else if (id == R.id.AnimationFragment) {
             fragment = AnimationFragment.newInstance();
+        }else if (id == R.id.start_other_app) {
+            Intent intent = new Intent(this, StartOtherAppActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.device_info) {
+            Intent intent = new Intent(this, DeviceInfoActivity.class);
+            startActivity(intent);
         }
-
-
 
         if (fragment != null) {
             fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
@@ -305,7 +314,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * Notice that your app receives the onTrimMemory() callback with TRIM_MEMORY_UI_HIDDEN
      * only when all the UI components of your app process become hidden from the user.
      * 与onstop()不同之处在于，onstop()在跳转到其他页面时也会被调用，而onTrimMemory()只会在应用进程所有组件
-     * 都被的情况下才会被处罚调用
+     * 都被的情况下才会被触发调用
      * @param level
      */
     @Override

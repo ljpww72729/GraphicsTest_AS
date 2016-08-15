@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId "com.kk.lp"
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 22
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -21,6 +21,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
+    dataBinding.enabled = true
 
 }
 //task clean(type: Exec) {
@@ -40,7 +42,6 @@ dependencies {
     compile "com.android.support:design:${supportVersion}"
     compile "com.android.support:support-vector-drawable:${supportVersion}"
     compile "com.android.support:animated-vector-drawable:${supportVersion}"
-    compile project(':volley')
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.mikepenz:iconics-core:2.5.5@aar'
     compile 'com.mikepenz:typeicons-typeface:2.0.7.1@aar'
