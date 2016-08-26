@@ -31,6 +31,7 @@ import com.kk.lp.async.AsyncFragment;
 import com.kk.lp.button.ButtonFragment;
 import com.kk.lp.deep_link.StartOtherAppActivity;
 import com.kk.lp.deviceInfo.DeviceInfoActivity;
+import com.kk.lp.deviceInfo.InstalledAppListFragment;
 import com.kk.lp.facebookchathead.ServiceChatHead;
 import com.kk.lp.glide.ImgWithGlideFragment;
 import com.kk.lp.graphicstest.ArcsFragment;
@@ -213,6 +214,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }else if (id == R.id.device_info) {
             Intent intent = new Intent(this, DeviceInfoActivity.class);
             startActivity(intent);
+        } else if (id == R.id.installed_app_list) {
+            fragment = InstalledAppListFragment.newInstance();
         }
 
         if (fragment != null) {

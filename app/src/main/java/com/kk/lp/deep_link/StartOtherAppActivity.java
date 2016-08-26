@@ -30,7 +30,7 @@ public class StartOtherAppActivity extends BaseActivity {
         start_other_app.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent resolveIntent = StartOtherAppActivity.this.getPackageManager().getLaunchIntentForPackage("com.ctoutiao");// 这里的packname就是从上面得到的目标apk的包名
+                Intent resolveIntent = StartOtherAppActivity.this.getPackageManager().getLaunchIntentForPackage("cc.lkme.uexLinkedME");// 这里的packname就是从上面得到的目标apk的包名
                 // 启动目标应用
                 if (resolveIntent != null) {
                     StartOtherAppActivity.this.startActivity(resolveIntent);

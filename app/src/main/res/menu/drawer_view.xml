@@ -111,6 +111,9 @@
         <item
             android:id="@+id/device_info"
             android:title="获取设备信息"/>
+        <item
+            android:id="@+id/installed_app_list"
+            android:title="获取已安装应用信息"/>
 
     </group>
 </menu>
