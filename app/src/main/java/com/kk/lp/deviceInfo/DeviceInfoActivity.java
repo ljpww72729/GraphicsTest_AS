@@ -44,7 +44,7 @@ public class DeviceInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_device_info);
+        binding = DataBindingUtil.setContentView(DeviceInfoActivity.this, R.layout.activity_device_info);
         binding.keyGet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

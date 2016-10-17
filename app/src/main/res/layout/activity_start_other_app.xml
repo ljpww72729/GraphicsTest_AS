@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.kk.lp.deep_link.StartOtherAppActivity"
+     >
+<LinearLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -8,7 +15,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.kk.lp.deep_link.StartOtherAppActivity">
+    >
 
     <Button
         android:layout_width="wrap_content"
@@ -27,4 +34,23 @@
         android:text="通过intent开启一个App"
         android:id="@+id/start_other_app_intent"
         android:layout_marginTop="16dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开启淘宝"
+        android:id="@+id/start_taobao"
+        android:layout_marginTop="16dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="深度链接"
+        android:id="@+id/start_deeplinks"
+        android:layout_marginTop="16dp" />
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/start_webview"></WebView>
 </LinearLayout>
+</ScrollView>

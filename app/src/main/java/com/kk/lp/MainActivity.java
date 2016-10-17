@@ -29,6 +29,7 @@ import com.kk.lp.animation.AnimationFragment;
 import com.kk.lp.annotation.AnnotationFragment_;
 import com.kk.lp.async.AsyncFragment;
 import com.kk.lp.button.ButtonFragment;
+import com.kk.lp.deep_link.OpenWithBrowserFragment;
 import com.kk.lp.deep_link.StartOtherAppActivity;
 import com.kk.lp.deviceInfo.DeviceInfoActivity;
 import com.kk.lp.deviceInfo.InstalledAppListFragment;
@@ -216,6 +217,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             startActivity(intent);
         } else if (id == R.id.installed_app_list) {
             fragment = InstalledAppListFragment.newInstance();
+        } else if (id == R.id.openwithbrowserfragment) {
+            fragment = OpenWithBrowserFragment.newInstance();
         }
 
         if (fragment != null) {

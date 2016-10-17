@@ -17,6 +17,20 @@ public class RegexUtils {
         return Pattern.matches(regex,mobile);
     }
 
+    /**
+     * 测试uri scheme表达式
+     * @param uriScheme
+     * @return
+     */
+    public static boolean regluarUriScheme(String uriScheme) {
+        String rfc2396regex = "^(([a-zA-Z][a-zA-Z0-9\\+\\-\\.]*)://)((([^/?#]*))?([^?#]*)(\\?([^#]*))?)?(#(.*))?";
+        String http_scheme_slashes = "^(https?://)/+(.*)";
+        String all_schemes_pattern = "(?i)^(http|https|ftp|mms|rtsp|wais)://.*";
+        if (uriScheme.matches(rfc2396regex)){
+            return true;
+        }
+        return false;
+    }
     public static void main(String args[]){
         System.out.println(checkMobile("12341281011"));
     }

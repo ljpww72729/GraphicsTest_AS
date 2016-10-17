@@ -114,6 +114,9 @@
         <item
             android:id="@+id/installed_app_list"
             android:title="获取已安装应用信息"/>
+        <item
+            android:id="@+id/openwithbrowserfragment"
+            android:title="指定浏览器打开"/>
 
     </group>
 </menu>
