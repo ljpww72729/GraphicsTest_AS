@@ -1,9 +1,5 @@
 package com.kk.lp.annotation;
 
-import java.net.URLEncoder;
-
-import org.androidannotations.annotations.EFragment;
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,6 +8,8 @@ import android.view.ViewGroup;
 
 import com.kk.lp.BaseFragment;
 import com.kk.lp.R;
+
+import org.androidannotations.annotations.EFragment;
 
 /**
  * 

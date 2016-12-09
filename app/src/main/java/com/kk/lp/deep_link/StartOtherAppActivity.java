@@ -97,9 +97,9 @@ public class StartOtherAppActivity extends BaseActivity {
         //允许javascript
         webSettings.setJavaScriptEnabled(true);
 //        start_webview.loadUrl("https://lkme.cc/IfC/yGs2hfPK8");
-//        start_webview.loadUrl("http://linkedme.cc:9099/test.jsp");
+        start_webview.loadUrl("http://linkedme.cc:9099/browser/test.jsp");
 //        start_webview.loadUrl("http://www.whatsmyua.com");
-        start_webview.loadUrl("http://a.app.qq.com/o/simple.jsp?pkgname=com.ctoutiao&android_scheme=ctoutiao://?click_id=yGs2hfPK8");
+//        start_webview.loadUrl("http://a.app.qq.com/o/simple.jsp?pkgname=com.ctoutiao&android_scheme=ctoutiao://?click_id=yGs2hfPK8");
         start_webview.setWebViewClient(new WebViewClient() {
 
             @Override

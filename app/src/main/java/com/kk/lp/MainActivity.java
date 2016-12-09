@@ -196,23 +196,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             startActivity(intent);
         } else if (id == R.id.focusChange) {
             fragment = FocusChangeEditFragment.newInstance();
-        }else if (id == R.id.myDrawerLayoutActivity) {
+        } else if (id == R.id.myDrawerLayoutActivity) {
             Intent intent = new Intent(this, MyDrawerLayoutActivity.class);
             startActivity(intent);
-        }else if (id == R.id.slidingPaneActivity) {
+        } else if (id == R.id.slidingPaneActivity) {
             Intent intent = new Intent(this, SlidingPaneActivity.class);
             startActivity(intent);
         } else if (id == R.id.volley) {
             fragment = VolleyFragment.newInstance();
         } else if (id == R.id.custom_linearlayout) {
             fragment = CustomViewFragment.newInstance();
-        }
-        else if (id == R.id.AnimationFragment) {
+        } else if (id == R.id.AnimationFragment) {
             fragment = AnimationFragment.newInstance();
-        }else if (id == R.id.start_other_app) {
+        } else if (id == R.id.start_other_app) {
             Intent intent = new Intent(this, StartOtherAppActivity.class);
             startActivity(intent);
-        }else if (id == R.id.device_info) {
+        } else if (id == R.id.device_info) {
             Intent intent = new Intent(this, DeviceInfoActivity.class);
             startActivity(intent);
         } else if (id == R.id.installed_app_list) {
@@ -317,11 +316,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     /**
-     * Notice that your app receives the onTrimMemory() callback with TRIM_MEMORY_UI_HIDDEN
-     * only when all the UI components of your app process become hidden from the user.
-     * 与onstop()不同之处在于，onstop()在跳转到其他页面时也会被调用，而onTrimMemory()只会在应用进程所有组件
-     * 都被的情况下才会被触发调用
-     * @param level
+     * Notice that your app receives the onTrimMemory() callback with TRIM_MEMORY_UI_HIDDEN only
+     * when all the UI components of your app process become hidden from the user.
+     * 与onstop()不同之处在于，onstop()在跳转到其他页面时也会被调用，而onTrimMemory()只会在应用进程所有组件 都被的情况下才会被触发调用
      */
     @Override
     public void onTrimMemory(int level) {

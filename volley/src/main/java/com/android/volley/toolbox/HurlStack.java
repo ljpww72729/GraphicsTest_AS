@@ -90,7 +90,6 @@ public class HurlStack implements HttpStack {
         for (String headerName : map.keySet()) {
             connection.addRequestProperty(headerName, map.get(headerName));
         }
-        connection.getContentType();
         setConnectionParametersForRequest(connection, request);
         // Initialize HttpResponse with data from the HttpURLConnection.
         int responseCode = connection.getResponseCode();

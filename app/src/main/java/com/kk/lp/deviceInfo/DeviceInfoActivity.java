@@ -1,11 +1,14 @@
 package com.kk.lp.deviceInfo;
 
 import android.Manifest;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,6 +32,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 import java.util.UUID;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -71,16 +78,14 @@ public class DeviceInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //23开始无法写入到settings中,会抛出一个异常java.lang.IllegalArgumentException: You cannot keep your settings in the secure settings.
                 if (checkSystemWritePermission()) {
-//                    getPermission(MY_PERMISSIONS_REQUEST_WRITE_STORAGE);
-                    writeSettings();
+                    getPermission(MY_PERMISSIONS_REQUEST_WRITE_STORAGE);
                 }
             }
         });
         binding.writeGet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                writeStorage();
-//                getPermission(MY_PERMISSIONS_REQUEST_WRITE_STORAGE);
+                getPermission(MY_PERMISSIONS_REQUEST_WRITE_STORAGE);
             }
         });
 
@@ -152,7 +157,7 @@ public class DeviceInfoActivity extends AppCompatActivity {
                     }
                     File file = new File(fileDir, "lm_device_id");
                     FileOutputStream fileOutputStream = new FileOutputStream(file);
-                    fileOutputStream.write("你好".getBytes());
+                    fileOutputStream.write("你好啊".getBytes());
                     fileOutputStream.close();
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
@@ -215,6 +220,9 @@ public class DeviceInfoActivity extends AppCompatActivity {
                 + Build.CPU_ABI + ",Build.BRAND=" + Build.BRAND + ",Build.DEVICE=" + Build.DEVICE
                 + ",Build.MANUFACTURER=" + Build.MANUFACTURER + ",Build.MODEL=" + Build.MODEL + ",Build.PRODUCT=" + Build.PRODUCT + ",Build.FINGERPRINT="+ Build.FINGERPRINT + "\n";
         device_info += "Psuedoid=====" + getUniquePsuedoID() + "\n";
+        device_info += "bluetoothInfo=====" + getBluetoothInfo() + "\n";
+        device_info += "device_name=====" + Settings.System.getString(getContentResolver(), "device_name") + "\n";
+
         String serial = null;
         try {
             serial = Build.class.getField("SERIAL").get(null).toString();
@@ -227,6 +235,17 @@ public class DeviceInfoActivity extends AppCompatActivity {
 
         binding.keyShow.setText(device_info);
         
+    }
+
+    private String getBluetoothInfo(){
+        String deviceName = "";
+        try {
+            BluetoothAdapter myDevice = BluetoothAdapter.getDefaultAdapter();
+            deviceName = myDevice.getName();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return deviceName;
     }
 
     //获得IMEI号
@@ -277,7 +296,7 @@ public class DeviceInfoActivity extends AppCompatActivity {
     }
 
     String getCpuInfo() {
-        String macSerial = null;
+        StringBuilder macSerial = new StringBuilder();
         String str = "";
         try {
             Process pp = Runtime.getRuntime().exec(
@@ -288,15 +307,14 @@ public class DeviceInfoActivity extends AppCompatActivity {
             for (; null != str; ) {
                 str = input.readLine();
                 if (str != null) {
-                    macSerial = str.trim();// 去空格
-                    break;
+                    macSerial.append(str + "\n");// 去空格
                 }
             }
         } catch (IOException ex) {
             // 赋予默认值
             ex.printStackTrace();
         }
-        return macSerial;
+        return macSerial.toString();
     }
 
     /**
@@ -342,6 +360,7 @@ public class DeviceInfoActivity extends AppCompatActivity {
         // Finally, combine the values we have found by using the UUID class to create a unique identifier
         return new UUID(m_szDevIDShort.hashCode(), deviceInfo.hashCode()).toString();
     }
+
 
     public void getPermission(final int permission) {
         String sysPermission = Manifest.permission.READ_PHONE_STATE;
@@ -663,6 +682,47 @@ public class DeviceInfoActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 获取ip地址
+     * @param application
+     * @return
+     */
+    public static String getIP(Context application) {
+        //获取wifi服务
+        WifiManager wifiManager = (WifiManager) application.getSystemService(Context.WIFI_SERVICE);
+        //判断wifi是否开启
+        if (!wifiManager.isWifiEnabled()) {
+            try {
+                for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+                    NetworkInterface intf = en.nextElement();
+                    for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                        InetAddress inetAddress = enumIpAddr.nextElement();
+                        if (!inetAddress.isLoopbackAddress()) {
+                            return inetAddress.getHostAddress().toString();
+                        }
+                    }
+                }
+            } catch (SocketException e) {
+                e.printStackTrace();
+            }
+        } else {
+            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+            int ipAddress = wifiInfo.getIpAddress();
+            String ip = intToIp(ipAddress);
+            return ip;
+        }
+        return null;
+    }
+
+
+    private static String intToIp(int i) {
+
+        return (i & 0xFF) + "." +
+                ((i >> 8) & 0xFF) + "." +
+                ((i >> 16) & 0xFF) + "." +
+                (i >> 24 & 0xFF);
     }
 
 
