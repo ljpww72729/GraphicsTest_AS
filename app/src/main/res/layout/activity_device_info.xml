@@ -76,6 +76,18 @@
                 android:layout_height="wrap_content"
                 android:text="写入到文件并获取文件内容" />
 
+            <TextView
+                    android:id="@+id/uri_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+            <Button
+                    android:id="@+id/test_uri"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="测试uri处理" />
+
         </LinearLayout>
     </ScrollView>
 </layout>

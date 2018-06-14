@@ -1,11 +1,15 @@
 package com.kk.lp.deviceInfo;
 
 import android.Manifest;
+import android.app.NotificationManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -16,9 +20,12 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -35,22 +42,33 @@ import java.io.LineNumberReader;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.util.Collections;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.regex.Pattern;
 
 public class DeviceInfoActivity extends AppCompatActivity {
+    private static final String TAG = "DeviceInfoActivity";
 
     private static final int MY_PERMISSIONS_REQUEST_READ_PHONE_STATE = 1000;
     private static final int MY_PERMISSIONS_REQUEST_WRITE_STORAGE = 1001;
     ActivityDeviceInfoBinding binding;
     private String device_info;
 
+    //获取位置信息
+    private LocationManager locationManager;
+    private String locationProvider;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        String android_imsi = telephonyManager.getSubscriberId();//获取手机IMSI号
+        System.out.println("imsi==" + android_imsi);
+        Log.d(TAG, "onCreate: imsi = " + android_imsi);
         binding = DataBindingUtil.setContentView(DeviceInfoActivity.this, R.layout.activity_device_info);
         binding.keyGet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,23 +107,85 @@ public class DeviceInfoActivity extends AppCompatActivity {
             }
         });
 
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    AdvertisingIdClient.AdInfo adInfo = AdvertisingIdClient
-                            .getAdvertisingIdInfo(DeviceInfoActivity.this);
-                    String advertisingId = adInfo.getId();
-                    boolean optOutEnabled = adInfo.isLimitAdTrackingEnabled();
-                    System.out.println("adi=====" + advertisingId);
-                    System.out.println("adi_opt=====" + optOutEnabled);
-                    // Log.i("ABC", "advertisingId" + advertisingId);
-                    // Log.i("ABC", "optOutEnabled" + optOutEnabled);
-                } catch (Exception e) {
-                    e.printStackTrace();
+        binding.testUri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                String httpString = "http://linkedme.cc:9099/browser/test.jsp?abc=342&bcd=125&j=123%23jjjjj/sdfs/asdfas";
+//                String httpString = "http://linkedme.cc:9099/browser/test.jsp?abc=342&bcd=125&j=123#jjjjj/sdfs/asdfas";
+//                String httpString = "http://linkedme.cc:9099/browser/test.jsp?%23jjjjj/sdfs/asdfas";
+//                String httpString = "http://linkedme.cc:9099/browser/test.jsp?#jjjjj/sdfs/asdfas";
+//                String httpString = "http://linkedme.cc:9099/browser/test.jsp?%23jjjjj/sdfs/asdfas";
+//                String httpString = "http://linkedme.cc:9099/browser/test.jsp#jjjjj/sdfs/asdfas";
+//                String httpString = "http://linkedme.cc:9099/browser/test.jsp%23jjjjj/sdfs/asdfas";
+//                String httpString = "http://linkedme.cc:9099";
+                String httpString = "http://linkedme.cc:9099#jjjjj/sdfs/asdfas";
+                Uri httpUri = Uri.parse(httpString);
+                String http_info = "";
+                http_info += "httpUri.getUserInfo()" + httpUri.getUserInfo() + "\n";
+                http_info += "httpUri.getQuery()" + httpUri.getQuery() + "\n";
+                http_info += "httpUri.getPath()" + httpUri.getPath() + "\n";
+                http_info += "httpUri.getEncodedPath()" + httpUri.getEncodedPath() + "\n";
+                http_info += "httpUri.getAuthority()" + httpUri.getAuthority() + "\n";
+                http_info += "httpUri.getEncodedAuthority()" + httpUri.getEncodedAuthority() + "\n";
+                http_info += "httpUri.getEncodedFragment()" + httpUri.getEncodedFragment() + "\n";
+                http_info += "httpUri.getEncodedPath()" + httpUri.getEncodedPath() + "\n";
+                http_info += "httpUri.getEncodedQuery()" + httpUri.getEncodedQuery() + "\n";
+                http_info += "httpUri.getEncodedSchemeSpecificPart()" + httpUri.getEncodedSchemeSpecificPart() + "\n";
+                http_info += "httpUri.getEncodedUserInfo()" + httpUri.getEncodedUserInfo() + "\n";
+                http_info += "httpUri.getFragment()" + httpUri.getFragment() + "\n";
+                http_info += "httpUri.getHost()" + httpUri.getHost() + "\n";
+                http_info += "httpUri.getLastPathSegment()" + httpUri.getLastPathSegment() + "\n";
+                http_info += "httpUri.getQueryParameter(\"abc\")" + httpUri.getQueryParameter("abc") + "\n";
+                http_info += "httpUri.getQueryParameter(\"j\")" + httpUri.getQueryParameter("j") + "\n";
+                http_info += "httpUri.getScheme()" + httpUri.getScheme() + "\n";
+                http_info += "httpUri.getPathSegments()" + httpUri.getPathSegments() + "\n";
+                http_info += "httpUri.getPort()" + httpUri.getPort() + "\n";
+                if (!TextUtils.isEmpty(httpUri.getEncodedQuery())) {
+                    String encodeQuery = httpUri.getEncodedQuery() + "&lm_from=android_webview";
+                    httpString = httpString.replaceFirst(httpUri.getEncodedQuery(), encodeQuery);
+                } else {
+                    if (TextUtils.isEmpty(httpUri.getEncodedPath())) {
+                        if (httpString.contains(httpUri.getEncodedAuthority() + "?")) {
+                            String encodeAuthority = httpUri.getEncodedAuthority() + "?lm_from=android_webview";
+                            httpString = httpString.replaceFirst(httpUri.getEncodedAuthority() + "\\?", encodeAuthority);
+                        } else {
+                            String encodeAuthority = httpUri.getEncodedAuthority() + "?lm_from=android_webview";
+                            httpString = httpString.replaceFirst(httpUri.getEncodedAuthority(), encodeAuthority);
+                        }
+                    } else {
+                        if (httpString.contains(httpUri.getEncodedPath() + "?")) {
+                            String encodePath = httpUri.getEncodedPath() + "?lm_from=android_webview";
+                            httpString = httpString.replaceFirst(httpUri.getEncodedPath() + "\\?", encodePath);
+                        } else {
+                            String encodePath = httpUri.getEncodedPath() + "?lm_from=android_webview";
+                            httpString = httpString.replaceFirst(httpUri.getEncodedPath(), encodePath);
+                        }
+                    }
                 }
-            }
-        }).start();
+                http_info += "httpString=" + httpString + "\n";
 
+                binding.uriInfo.setText(http_info);
+            }
+        });
+
+//        new Thread(new Runnable() {
+//            public void run() {
+//                try {
+//                    AdvertisingIdClient.AdInfo adInfo = AdvertisingIdClient
+//                            .getAdvertisingIdInfo(DeviceInfoActivity.this);
+//                    String advertisingId = adInfo.getId();
+//                    boolean optOutEnabled = adInfo.isLimitAdTrackingEnabled();
+//                    System.out.println("adi=====" + advertisingId);
+//                    System.out.println("adi_opt=====" + optOutEnabled);
+//                    // Log.i("ABC", "advertisingId" + advertisingId);
+//                    // Log.i("ABC", "optOutEnabled" + optOutEnabled);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
+//        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        getLocation();
     }
 
     private boolean checkSystemWritePermission() {
@@ -135,8 +215,7 @@ public class DeviceInfoActivity extends AppCompatActivity {
 
 
     private void writeStorage() {
-        if (DeviceInfoActivity.this.checkCallingOrSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
-        {
+        if (DeviceInfoActivity.this.checkCallingOrSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             writeToFile();
             binding.writeShow.setText(readFromFile());
         }
@@ -162,7 +241,7 @@ public class DeviceInfoActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                }finally {
+                } finally {
                     rwlock.writeLock().unlock();
                 }
             }
@@ -171,7 +250,7 @@ public class DeviceInfoActivity extends AppCompatActivity {
     }
 
     private String readFromFile() {
-         /* 创建一个读写锁 */
+        /* 创建一个读写锁 */
         ReadWriteLock rwlock = new ReentrantReadWriteLock();
         rwlock.readLock().lock();
         File fileDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "LMDevice");
@@ -181,7 +260,7 @@ public class DeviceInfoActivity extends AppCompatActivity {
         try {
             in = new BufferedReader(new FileReader(file));
             String s;
-            while ((s = in.readLine()) != null){
+            while ((s = in.readLine()) != null) {
                 sb.append(s);
             }
         } catch (IOException e) {
@@ -199,11 +278,11 @@ public class DeviceInfoActivity extends AppCompatActivity {
         return sb.toString();
     }
     /*
-* Generate a new EC key pair entry in the Android Keystore by
-* using the KeyPairGenerator API. The private key can only be
-* used for signing or verification and only with SHA-256 or
-* SHA-512 as the message digest.
-*/
+     * Generate a new EC key pair entry in the Android Keystore by
+     * using the KeyPairGenerator API. The private key can only be
+     * used for signing or verification and only with SHA-256 or
+     * SHA-512 as the message digest.
+     */
 
     private void getDeviceInfo() {
         device_info = "";
@@ -212,13 +291,16 @@ public class DeviceInfoActivity extends AppCompatActivity {
         }
         String ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         device_info += "ANDROID_ID=====" + ANDROID_ID + "\n";
+        device_info += "Build.VERSION.RELEASE=====" + Build.VERSION.RELEASE + "\n";
         String SerialNumber = android.os.Build.SERIAL;
         device_info += "SerialNumber=====" + SerialNumber + "\n";
         device_info += "mac地址=====" + getMac() + "\n";
+        device_info += "getNewMac地址=====" + getNewMac() + "\n";
+        device_info += "getLocalMacAddressFromIp地址=====" + getLocalMacAddressFromIp() + "\n";
         device_info += "cpu型号=====" + getCpuInfo() + "\n";
         device_info += "Psuedoid_param=====Build.BOARD=" + Build.BOARD + ",Build.CPU_ABI="
                 + Build.CPU_ABI + ",Build.BRAND=" + Build.BRAND + ",Build.DEVICE=" + Build.DEVICE
-                + ",Build.MANUFACTURER=" + Build.MANUFACTURER + ",Build.MODEL=" + Build.MODEL + ",Build.PRODUCT=" + Build.PRODUCT + ",Build.FINGERPRINT="+ Build.FINGERPRINT + "\n";
+                + ",Build.MANUFACTURER=" + Build.MANUFACTURER + ",Build.MODEL=" + Build.MODEL + ",Build.PRODUCT=" + Build.PRODUCT + ",Build.FINGERPRINT=" + Build.FINGERPRINT + "\n";
         device_info += "Psuedoid=====" + getUniquePsuedoID() + "\n";
         device_info += "bluetoothInfo=====" + getBluetoothInfo() + "\n";
         device_info += "device_name=====" + Settings.System.getString(getContentResolver(), "device_name") + "\n";
@@ -234,10 +316,10 @@ public class DeviceInfoActivity extends AppCompatActivity {
         device_info += "serial=====" + serial + "\n";
 
         binding.keyShow.setText(device_info);
-        
+
     }
 
-    private String getBluetoothInfo(){
+    private String getBluetoothInfo() {
         String deviceName = "";
         try {
             BluetoothAdapter myDevice = BluetoothAdapter.getDefaultAdapter();
@@ -256,6 +338,7 @@ public class DeviceInfoActivity extends AppCompatActivity {
         imei = "DEVICE_ID(IMEI)=====" + tm.getDeviceId() + "\n";
         //sim卡的设备
         imei += "SimSerialNumber=====" + tm.getSimSerialNumber() + "\n";
+        Log.d("LinkedME", "getIMEI: " + imei);
         return imei;
     }
 
@@ -293,6 +376,91 @@ public class DeviceInfoActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
         return macSerial;
+    }
+
+    /**
+     * 通过网络接口取
+     */
+    private static String getNewMac() {
+        try {
+            List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface nif : all) {
+                if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
+
+                byte[] macBytes = nif.getHardwareAddress();
+                if (macBytes == null) {
+                    return null;
+                }
+
+                StringBuilder res1 = new StringBuilder();
+                for (byte b : macBytes) {
+                    res1.append(String.format("%02X:", b));
+                }
+
+                if (res1.length() > 0) {
+                    res1.deleteCharAt(res1.length() - 1);
+                }
+                return res1.toString();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 根据IP地址获取MAC地址
+     */
+    private static String getLocalMacAddressFromIp() {
+        String strMacAddr = null;
+        try {
+            //获得IpD地址
+            InetAddress ip = getLocalInetAddress();
+            byte[] b = NetworkInterface.getByInetAddress(ip).getHardwareAddress();
+            StringBuffer buffer = new StringBuffer();
+            for (int i = 0; i < b.length; i++) {
+                if (i != 0) {
+                    buffer.append(':');
+                }
+                String str = Integer.toHexString(b[i] & 0xFF);
+                buffer.append(str.length() == 1 ? 0 + str : str);
+            }
+            strMacAddr = buffer.toString().toUpperCase();
+        } catch (Exception e) {
+
+        }
+
+        return strMacAddr;
+    }
+
+    /**
+     * 获取移动设备本地IP
+     */
+    private static InetAddress getLocalInetAddress() {
+        InetAddress ip = null;
+        try {
+            //列举
+            Enumeration<NetworkInterface> en_netInterface = NetworkInterface.getNetworkInterfaces();
+            while (en_netInterface.hasMoreElements()) {//是否还有元素
+                NetworkInterface ni = (NetworkInterface) en_netInterface.nextElement();//得到下一个元素
+                Enumeration<InetAddress> en_ip = ni.getInetAddresses();//得到一个ip地址的列举
+                while (en_ip.hasMoreElements()) {
+                    ip = en_ip.nextElement();
+                    if (!ip.isLoopbackAddress() && ip.getHostAddress().indexOf(":") == -1)
+                        break;
+                    else
+                        ip = null;
+                }
+
+                if (ip != null) {
+                    break;
+                }
+            }
+        } catch (SocketException e) {
+
+            e.printStackTrace();
+        }
+        return ip;
     }
 
     String getCpuInfo() {
@@ -477,17 +645,9 @@ public class DeviceInfoActivity extends AppCompatActivity {
     //同时存在的意思代表一条数据同时满足两个条件
 
     /**
-     * <p>生成的唯一标识组合分类:</p>
-     * <li>根据IMEI号及androidId生成</li>
-     * <li>根据IMEI号及SN号生成</li>
-     * <li>根据IMEI号及device_info生成</li>
-     * <li>根据androidId及SN号生成</li>
-     * <li>根据androidId及device_info生成</li>
-     * <li>根据SN号及device_info生成</li>
-     * <li>无任何有效标识,随机生成</li>
-     * <li></li>
-     *
-     * @return
+     * <p>生成的唯一标识组合分类:</p> <li>根据IMEI号及androidId生成</li> <li>根据IMEI号及SN号生成</li>
+     * <li>根据IMEI号及device_info生成</li> <li>根据androidId及SN号生成</li> <li>根据androidId及device_info生成</li>
+     * <li>根据SN号及device_info生成</li> <li>无任何有效标识,随机生成</li> <li></li>
      */
     public String device_id() {
         String android_id = "";//无效数据:9774d56d682e549c,null
@@ -686,8 +846,6 @@ public class DeviceInfoActivity extends AppCompatActivity {
 
     /**
      * 获取ip地址
-     * @param application
-     * @return
      */
     public static String getIP(Context application) {
         //获取wifi服务
@@ -723,6 +881,67 @@ public class DeviceInfoActivity extends AppCompatActivity {
                 ((i >> 8) & 0xFF) + "." +
                 ((i >> 16) & 0xFF) + "." +
                 (i >> 24 & 0xFF);
+    }
+
+
+    public void getLocation() {
+        List<String> providers = locationManager.getProviders(true);
+        if (providers.contains(LocationManager.GPS_PROVIDER)) {
+            //如果是GPS
+            locationProvider = LocationManager.GPS_PROVIDER;
+        } else if (providers.contains(LocationManager.NETWORK_PROVIDER)) {
+            //如果是Network
+            locationProvider = LocationManager.NETWORK_PROVIDER;
+        } else if (providers.contains(LocationManager.PASSIVE_PROVIDER)) {
+            //如果是基站定位
+            locationProvider = LocationManager.PASSIVE_PROVIDER;
+        } else {
+            Toast.makeText(this, "没有可用的位置提供器", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "无位置权限！", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Location location = locationManager.getLastKnownLocation(locationProvider);
+        if (location != null) {
+            //不为空,显示地理位置经纬度
+            showLocation(location);
+        }
+//监视地理位置变化
+        locationManager.requestLocationUpdates(locationProvider, 3000, 1, locationListener);
+    }
+
+    /**
+     * LocationListern监听器 参数：地理位置提供器、监听位置变化的时间间隔、位置变化的距离间隔、LocationListener监听器
+     */
+
+    LocationListener locationListener = new LocationListener() {
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle arg2) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+
+        @Override
+        public void onLocationChanged(Location location) {
+            //如果位置发生变化,重新显示
+            showLocation(location);
+        }
+    };
+
+    private void showLocation(Location location) {
+        Log.d("定位成功------->", "location------>" + "纬度为：" + location.getLatitude() + "\n经度为" + location.getLongitude());
     }
 
 

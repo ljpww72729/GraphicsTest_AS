@@ -218,6 +218,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             fragment = InstalledAppListFragment.newInstance();
         } else if (id == R.id.openwithbrowserfragment) {
             fragment = OpenWithBrowserFragment.newInstance();
+        } else if (id == R.id.getuserinfo) {
+            fragment = GetUserInfoFragment.newInstance();
         }
 
         if (fragment != null) {

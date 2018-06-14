@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.3'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.kk.lp"
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 27
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -26,27 +26,25 @@ android {
 //    commandLine 'cmd', "$lockhunter", '/delete', '/silent', buildDir
 //}
 ext {
-    supportVersion = "23.4.0"
+    supportVersion = "27.1.1"
 }
 dependencies {
-    compile files('libs/eventbus.jar')
-    compile "com.android.support:support-v4:${supportVersion}"
-    compile "com.android.support:appcompat-v7:${supportVersion}"
-    compile "com.android.support:percent:${supportVersion}"
-    compile "com.android.support:design:${supportVersion}"
-    compile "com.android.support:support-vector-drawable:${supportVersion}"
-    compile "com.android.support:animated-vector-drawable:${supportVersion}"
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.mikepenz:iconics-core:2.5.5@aar'
-    compile 'com.mikepenz:typeicons-typeface:2.0.7.1@aar'
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.alibaba:fastjson:1.1.46.android'
-    compile 'com.jaredrummler:android-processes:1.0.8'
-    compile 'com.android.support:support-v4:23.4.0'
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
-    compile project(':volley')
-    //    compile 'com.android.volley:volley:1.0.0'
-    compile files('libs/androidannotations-api-3.2.jar')
+    implementation files('libs/eventbus.jar')
+    implementation "com.android.support:support-v4:${supportVersion}"
+    implementation "com.android.support:appcompat-v7:${supportVersion}"
+    implementation "com.android.support:percent:${supportVersion}"
+    implementation "com.android.support:design:${supportVersion}"
+    implementation "com.android.support:support-vector-drawable:${supportVersion}"
+    implementation "com.android.support:animated-vector-drawable:${supportVersion}"
+    implementation 'com.jakewharton:butterknife:8.7.0'
+    implementation 'com.mikepenz:iconics-core:2.5.5@aar'
+    implementation 'com.mikepenz:typeicons-typeface:2.0.7.1@aar'
+    implementation 'com.squareup.okhttp3:okhttp:3.2.0'
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+    implementation 'com.alibaba:fastjson:1.1.46.android'
+    implementation 'com.jaredrummler:android-processes:1.0.8'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    implementation project(':volley')
+    implementation files('libs/androidannotations-api-3.2.jar')
 }

@@ -41,7 +41,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.KeyEventCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewGroupCompat;
@@ -1065,8 +1064,7 @@ public class MyDrawerLayout extends ViewGroup implements MyDrawerLayoutImpl {
                         ViewCompat.setElevation(child, mDrawerElevation);
                     }
                 }
-                final @EdgeGravity int childGravity =
-                        getDrawerViewAbsoluteGravity(child) & Gravity.HORIZONTAL_GRAVITY_MASK;
+                final @EdgeGravity int childGravity = getDrawerViewAbsoluteGravity(child) & Gravity.HORIZONTAL_GRAVITY_MASK;
                 // Note that the isDrawerView check guarantees that childGravity here is either
                 // LEFT or RIGHT
                 boolean isLeftEdgeDrawer = (childGravity == Gravity.LEFT);
@@ -1843,7 +1841,7 @@ public class MyDrawerLayout extends ViewGroup implements MyDrawerLayoutImpl {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && hasVisibleDrawer()) {
-            KeyEventCompat.startTracking(event);
+            event.startTracking();
             return true;
         }
         return super.onKeyDown(keyCode, event);

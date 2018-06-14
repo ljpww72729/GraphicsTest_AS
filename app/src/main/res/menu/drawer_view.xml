@@ -2,121 +2,124 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/ArcsFragment"
-            android:title="Arcs"/>
+                android:id="@+id/ArcsFragment"
+                android:title="Arcs"/>
         <item
-            android:id="@+id/LayerFragment"
-            android:title="layer"/>
+                android:id="@+id/LayerFragment"
+                android:title="layer"/>
         <item
-            android:id="@+id/PathFragment"
-            android:title="pathEffect"/>
+                android:id="@+id/PathFragment"
+                android:title="pathEffect"/>
         <item
-            android:id="@+id/DoubleBitmapDraw"
-            android:title="双缓冲实现画板"/>
+                android:id="@+id/DoubleBitmapDraw"
+                android:title="双缓冲实现画板"/>
         <item
-            android:id="@+id/BezierFragment"
-            android:title="贝塞尔曲线"/>
+                android:id="@+id/BezierFragment"
+                android:title="贝塞尔曲线"/>
         <item
-            android:id="@+id/ProgressViewFragment"
-            android:title="加载动画"/>
+                android:id="@+id/ProgressViewFragment"
+                android:title="加载动画"/>
         <item
-            android:id="@+id/RadiusButtonViewFragment"
-            android:title="自定义按钮"/>
+                android:id="@+id/RadiusButtonViewFragment"
+                android:title="自定义按钮"/>
         <item
-            android:id="@+id/CameraFragment"
-            android:title="拍照"/>
+                android:id="@+id/CameraFragment"
+                android:title="拍照"/>
         <item
-            android:id="@+id/WebviewFragment"
-            android:title="Webview"/>
+                android:id="@+id/WebviewFragment"
+                android:title="Webview"/>
         <item
-            android:id="@+id/AsyncFragment"
-            android:title="Async"/>
+                android:id="@+id/AsyncFragment"
+                android:title="Async"/>
         <item
-            android:id="@+id/ButtonFragment"
-            android:title="Button"/>
+                android:id="@+id/ButtonFragment"
+                android:title="Button"/>
         <item
-            android:id="@+id/AnnotationFragment_"
-            android:title="Annotation"/>
+                android:id="@+id/AnnotationFragment_"
+                android:title="Annotation"/>
         <item
-            android:id="@+id/ServerFragment"
-            android:title="socket服务器"/>
+                android:id="@+id/ServerFragment"
+                android:title="socket服务器"/>
         <item
-            android:id="@+id/ClientFragment"
-            android:title="socket客户端"/>
+                android:id="@+id/ClientFragment"
+                android:title="socket客户端"/>
         <item
-            android:id="@+id/FilePathFragment"
-            android:title="文件操作"/>
+                android:id="@+id/FilePathFragment"
+                android:title="文件操作"/>
         <item
-            android:id="@+id/TextViewLongClick"
-            android:title="自定义长按选择事件"/>
+                android:id="@+id/TextViewLongClick"
+                android:title="自定义长按选择事件"/>
         <item
-            android:id="@+id/PercentLayoutFragment"
-            android:title="百分比布局"/>
+                android:id="@+id/PercentLayoutFragment"
+                android:title="百分比布局"/>
         <item
-            android:id="@+id/PopupMenuFragment"
-            android:title="PopupMenu"/>
+                android:id="@+id/PopupMenuFragment"
+                android:title="PopupMenu"/>
         <item
-            android:id="@+id/XScrollViewFragment"
-            android:title="XScrollView"/>
+                android:id="@+id/XScrollViewFragment"
+                android:title="XScrollView"/>
         <item
-            android:id="@+id/ViewDragFragment"
-            android:title="DragView"/>
+                android:id="@+id/ViewDragFragment"
+                android:title="DragView"/>
         <item
-            android:id="@+id/TouchGestureDetectorFragment"
-            android:title="touchGestureDetector"/>
+                android:id="@+id/TouchGestureDetectorFragment"
+                android:title="touchGestureDetector"/>
         <item
-            android:id="@+id/FABFragment"
-            android:title="Floating action bar"/>
+                android:id="@+id/FABFragment"
+                android:title="Floating action bar"/>
         <item
-            android:id="@+id/vectorDrawable"
-            android:title="vectorDrawable"/>
+                android:id="@+id/vectorDrawable"
+                android:title="vectorDrawable"/>
         <item
-            android:id="@+id/chatHead"
-            android:title="chatHead"/>
+                android:id="@+id/chatHead"
+                android:title="chatHead"/>
         <item
-            android:id="@+id/vectorDrawableActivity"
-            android:title="VectorDrawableActivity"/>
+                android:id="@+id/vectorDrawableActivity"
+                android:title="VectorDrawableActivity"/>
         <item
-            android:id="@+id/glide_img"
-            android:title="Glide图片展示"/>
+                android:id="@+id/glide_img"
+                android:title="Glide图片展示"/>
         <item
-            android:id="@+id/async_task_loader"
-            android:title="AsyncTaskLoader"/>
+                android:id="@+id/async_task_loader"
+                android:title="AsyncTaskLoader"/>
         <item
-            android:id="@+id/mvp"
-            android:title="MVP架构原理"/>
+                android:id="@+id/mvp"
+                android:title="MVP架构原理"/>
         <item
-            android:id="@+id/focusChange"
-            android:title="变更焦点"/>
+                android:id="@+id/focusChange"
+                android:title="变更焦点"/>
         <item
-            android:id="@+id/myDrawerLayoutActivity"
-            android:title="拖拽布局"/>
+                android:id="@+id/myDrawerLayoutActivity"
+                android:title="拖拽布局"/>
 
         <item
-            android:id="@+id/slidingPaneActivity"
-            android:title="sliding布局"/>
+                android:id="@+id/slidingPaneActivity"
+                android:title="sliding布局"/>
         <item
-            android:id="@+id/volley"
-            android:title="volley获取数据"/>
+                android:id="@+id/volley"
+                android:title="volley获取数据"/>
         <item
-            android:id="@+id/custom_linearlayout"
-            android:title="自定义布局测试"/>
+                android:id="@+id/custom_linearlayout"
+                android:title="自定义布局测试"/>
         <item
-            android:id="@+id/AnimationFragment"
-            android:title="动画测试"/>
+                android:id="@+id/AnimationFragment"
+                android:title="动画测试"/>
         <item
-            android:id="@+id/start_other_app"
-            android:title="开启另一个APP"/>
+                android:id="@+id/start_other_app"
+                android:title="开启另一个APP"/>
 
         <item
-            android:id="@+id/device_info"
-            android:title="获取设备信息"/>
+                android:id="@+id/device_info"
+                android:title="获取设备信息"/>
         <item
-            android:id="@+id/installed_app_list"
-            android:title="获取已安装应用信息"/>
+                android:id="@+id/installed_app_list"
+                android:title="获取已安装应用信息"/>
         <item
-            android:id="@+id/openwithbrowserfragment"
-            android:title="指定浏览器打开"/>
+                android:id="@+id/openwithbrowserfragment"
+                android:title="指定浏览器打开"/>
+        <item
+                android:id="@+id/getuserinfo"
+                android:title="获取用户数据"/>
 
     </group>
 </menu>

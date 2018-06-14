@@ -85,6 +85,7 @@ public class InstalledAppListFragment extends BaseFragment {
         return binding.getRoot();
     }
 
+
     @Override
     public void onStart() {
         super.onStart();

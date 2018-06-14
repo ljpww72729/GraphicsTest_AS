@@ -11,10 +11,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
     >
 
     <Button
@@ -47,7 +46,70 @@
         android:text="深度链接"
         android:id="@+id/start_deeplinks"
         android:layout_marginTop="16dp" />
+    <RelativeLayout
+            android:id="@+id/ad_show"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@android:color/white">
+        <ImageView
+                android:id="@+id/img"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/toutiao"
+                android:layout_margin="12dp"
+                />
+        <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="今日头条"
+                android:textSize="16dp"
+                android:layout_toRightOf="@+id/img"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="4dp"
+                android:textColor="#535252"/>
+        <TextView
+                android:id="@+id/sub_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张柏芝新恋情曝光，称还想生五个孩子！"
+                android:textSize="11dp"
+                android:layout_toRightOf="@+id/img"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="4dp"
+                android:textColor="#9b9b9b"/>
+        <TextView
+                android:id="@+id/ad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="广告 · 小米"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="5dp"
+                android:textSize="10dp"
+                android:textColor="#9b9b9b"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/close"/>
+        <com.kk.lp.deep_link.CloseView
+                android:id="@+id/close"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="立即下载"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="14dp"
+                android:layout_marginBottom="14dp"
+                android:textColor="#32cd9f"/>
+    </RelativeLayout>
     <WebView
+            android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

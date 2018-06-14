@@ -1,5 +1,6 @@
 package com.kk.lp.popupmenuandwindow;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -25,16 +26,16 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class PopupMenuFragment extends BaseFragment {
 
 
-    @Bind(R.id.show)
+    @BindView(R.id.show)
     Button show;
-    @Bind(R.id.show_popupwindow)
+    @BindView(R.id.show_popupwindow)
     Button show_popupwindow;
     private Context mContext;
     private PopupWindow popupWindow = null;
@@ -68,9 +69,9 @@ public class PopupMenuFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
+    @SuppressLint("RestrictedApi")
     @OnClick(R.id.show)
     public void show(Button show) {
         PopupMenu popupMenu = new PopupMenu(this.getActivity(), show);
@@ -147,8 +148,6 @@ public class PopupMenuFragment extends BaseFragment {
 
     /**
      * 改变popupwindow的显示与隐藏
-     *
-     * @param show
      */
     public void changePopupWindowStatus(boolean show) {
         if (popupWindow != null) {
@@ -166,20 +165,21 @@ public class PopupMenuFragment extends BaseFragment {
             }
         }
     }
+
     @OnClick(R.id.listpopupwindow)
-    public void listpopupwindowClick(Button btn){
+    public void listpopupwindowClick(Button btn) {
         ListPopupWindow lpw = new ListPopupWindow(mContext);
         lpw.setAnchorView(btn);
-        LinkedList<HashMap<String,String>> data = new LinkedList<HashMap<String, String>>();
-        HashMap<String,String> one = new HashMap<>();
-        one.put("key","保存订单");
+        LinkedList<HashMap<String, String>> data = new LinkedList<HashMap<String, String>>();
+        HashMap<String, String> one = new HashMap<>();
+        one.put("key", "保存订单");
         data.add(one);
-        HashMap<String,String> two = new HashMap<>();
-        two.put("key","提交");
+        HashMap<String, String> two = new HashMap<>();
+        two.put("key", "提交");
         data.add(two);
         String[] from = new String[]{"key"};
         int[] to = new int[]{android.R.id.text1};
-        ListAdapter listAdapter = new SimpleAdapter(mContext,data,android.R.layout.simple_list_item_1,from,to);
+        ListAdapter listAdapter = new SimpleAdapter(mContext, data, android.R.layout.simple_list_item_1, from, to);
         lpw.setAdapter(listAdapter);
         lpw.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
         lpw.setVerticalOffset(20);
